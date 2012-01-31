@@ -112,58 +112,8 @@
 			</div>
 
 
-      <div>
-      
-        <script type="text/javascript">
-          
-          window.onload = function() {
-
-    //				var width = screen.availWidth - 250;
-            var width = window.innerWidth - 250;
-    //				alert(document.body.clientWidth);
-    //				alert(document.documentElement.clientWidth); 
-    //					alert(screen.width);
-            if(width < 400)  width = 400;
-            if(width > 1000) width = 1000;
-
-            var app = new UMLClassDiagram();
-
-
-        //The canvas elements
-        var div_diagram = document.createElement( 'div' );
-        div_diagram.setAttribute( 'id', 'ud_diagram_div' );
-        div_diagram.setAttribute( 'class', 'ud_diagram_div' );
-        div_diagram.style.width = this._width + 'px';
-        div_diagram.style.height = this._height + 'px';
-        
-        this._diagram_div = div_diagram;
-        
-        div_container.appendChild( div_diagram );//se añade el div creado para almacenar el lienzo del diagrama al div que contiene la parte derecha.
-        main.appendChild( div_container );////se añade parte derecha correspondiente al menu al div que hay en el body de fichero.html
-        
-        
-        //main canvas
-        var canvas;
-        canvas = document.createElement( 'canvas' );
-        canvas.setAttribute( 'class', 'ud_diagram_canvas' );
-        canvas.width = this._width;
-        canvas.height = this._height;
-
-        div_diagram.appendChild( canvas );		//se crea el canvas principal y se añade al div que contiene el lienzo del diagrama
-        this._mainContext = canvas.getContext( '2d' );
-        this._mainCanvas = canvas;
-        
-        //motion canvas
-        canvas = document.createElement( 'canvas' );
-        canvas.setAttribute( 'class', 'ud_diagram_canvas' );
-        canvas.width = this._width;
-        canvas.height = this._height;
-        canvas.onmousedown = function() { return false; }
-        
-        div_diagram.appendChild( canvas );//se crea el canvas de interaccion y se añade al div que contiene el lienzo del diagrama
-        this._motionContext = canvas.getContext( '2d' );
-          }
-        </script>
+      <div id="canvass">
+       
       </div>
 		</div>
 	</body>
