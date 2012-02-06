@@ -13,12 +13,11 @@
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
     <link type="text/css" rel="stylesheet" href="${resource(dir: 'css', file: 'UDStyle.css')}" media="screen" />
-		<g:layoutHead/>
-    <g:javascript library="jquery" plugin="jquery"/>  
-    <r:layoutResources />
     <script type="text/javascript" src="${resource(dir: 'js', file:'UDCore.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file:'UDModules.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file:'application.js')}"></script>
+		<g:layoutHead/>
+        <r:layoutResources />
 	</head>
 	<body>
 		<!--<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>-->

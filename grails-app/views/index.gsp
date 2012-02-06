@@ -117,8 +117,6 @@
       <div id="container" style="border: 8px solid #000;">
       hello world
       </div>
-
-      </div>
 		</div>
 	</body>
 </html>
