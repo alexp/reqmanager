@@ -5,5 +5,16 @@
     <title>Welcome to Grails</title>
     <meta content='main' name='layout' />
   </head>
-  <div id='container'></div>
+  <div id='content'>
+    
+    <g:link action='create' controller='project'>
+      new project
+    </g:link>
+    <div id='h1'>Project list</div>
+    <g:each in='${projects}' var='project'>
+      <g:link action='view' controller='project' id='${project.id}'>
+        ${project.name}
+      </g:link>
+    </g:each>
+  </div>
 </html>

@@ -1,0 +1,9 @@
+%g:form(method="post")
+  Name:
+  %g:textField(name="name" value="${project?.name}")
+  %br
+
+  Description:
+  %g:textField(name="description" value="${project?.description}")
+
+  %g:actionSubmit(id="save" action="save" value="Save")
