@@ -5,10 +5,11 @@ class Project {
     String name
     String description
     java.sql.Timestamp timestamp
-    java.sql.Date deadline
+    java.util.Date deadline
 
     static hasMany = [requirements:Requirement]
 
     static constraints = {
+      deadline(nullable: true)
     }
 }

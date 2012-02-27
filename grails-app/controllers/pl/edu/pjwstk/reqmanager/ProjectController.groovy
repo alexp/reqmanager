@@ -17,11 +17,16 @@ class ProjectController {
       if(!project.save(flush:true)) {
         flash.message = "nie udany zapis"
         println "nie nie nie nie"
+        println project.errors
         render(view: "create", model: [project : project])
         return
       }
 
       flash.message = "Successfully saved a project"
       redirect(action: "show", id: project.id)
+    }
+
+    def show = {
+      [project : Project.get(params.id)]
     }
 }

@@ -12,5 +12,5 @@
 
     #h1 Project list
     %g:each(in="${projects}" var="project")
-      %g:link(controller="project" action="view" id="${project.id}")
+      %g:link(controller="project" action="show" id="${project.id}")
         ${project.name}

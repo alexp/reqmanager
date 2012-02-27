@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title Project details
+    %meta(name="layout" content="main")
+
+
+  #content 
+  
+    %g:link(controller="project" action="create")
+      new project
+
+    %h1
+      Projekt: ${project.name}
+    %p
+      Opis: ${project.description}
+
+
+    %p
+      %g:link(controller="requirement" action="add")
+
