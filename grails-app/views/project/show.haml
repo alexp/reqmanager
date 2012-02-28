@@ -6,7 +6,6 @@
 
 
   #content 
-  
     %g:link(controller="project" action="create")
       new project
 
@@ -15,7 +14,6 @@
     %p
       Opis: ${project.description}
 
-
     %p
-      %g:link(controller="requirement" action="add")
-
+      %g:link(controller="requirement" action="create" params="[project_id : project.id]")
+        new requirement for this project

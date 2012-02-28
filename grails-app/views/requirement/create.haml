@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Requirement details
+    %meta(name="layout" content="main")
+
+
+  #content 
+    %g:form(method="post")
+      %g:hiddenField(name="project.id" value="params.project_id")
+      %g:textField(name="name" value="")      
+      %g:actionSubmit(id="save" action="save" value="Save")
+

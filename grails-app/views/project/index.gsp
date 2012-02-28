@@ -12,7 +12,7 @@
     </g:link>
     <div id='h1'>Project list</div>
     <g:each in='${projects}' var='project'>
-      <g:link action='view' controller='project' id='${project.id}'>
+      <g:link action='show' controller='project' id='${project.id}'>
         ${project.name}
       </g:link>
     </g:each>

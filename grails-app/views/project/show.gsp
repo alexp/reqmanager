@@ -6,7 +6,6 @@
     <meta content='main' name='layout' />
   </head>
   <div id='content'>
-    
     <g:link action='create' controller='project'>
       new project
     </g:link>
@@ -15,6 +14,11 @@
     </h1>
     <p>
       Opis: ${project.description}
+    </p>
+    <p>
+      <g:link action='create' controller='requirement' params='[project_id : project.id]'>
+        new requirement for this project
+      </g:link>
     </p>
   </div>
 </html>

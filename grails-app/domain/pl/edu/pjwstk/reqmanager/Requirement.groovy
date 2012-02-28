@@ -4,6 +4,8 @@ class Requirement {
 
     static belongsTo = Project
 
+    String name
+
     static constraints = {
     }
 }
