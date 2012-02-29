@@ -7,20 +7,24 @@ class RequirementController {
   }
 
   def save = {
+
+    println "save initiated"
+    println params
+
     def requirement = new Requirement(params)
     def project = Project.get(params.projectId)
 
-    if(project != null) {
-      requirement.project = project
+    println "requ: ${requirement} ; pro: ${project}"
 
-      if(!requirement.save()) {
-        flash.message = "nieudany zapis wymagania"
-        render(view: "create", model: [project : project])
-        return
-      }
+    requirement.project = project
 
-      flash.message = "Requirement successfully saved"
-      redirect(controller: "project", action: "show", id: project.id)
+    if(!requirement.save()) {
+      flash.message = "nieudany zapis wymagania"
+      render(view: "create", model: [project : project])
+      return
     }
+
+    flash.message = "Requirement successfully saved"
+    redirect(controller: "project", action: "show", id: project.id)
   }
 }

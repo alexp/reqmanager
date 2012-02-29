@@ -6,8 +6,8 @@
     <meta content='main' name='layout' />
   </head>
   <div id='content'>
-    <g:form method='post'>
-      <g:hiddenField name='project.id' value='params.project_id'></g:hiddenField>
+    <g:form action='save' method='post'>
+      <g:hiddenField name='project.id' value='${params.project_id}'></g:hiddenField>
       <g:textField name='name' value=''></g:textField>
       <g:actionSubmit action='save' id='save' value='Save'></g:actionSubmit>
     </g:form>
