@@ -6,15 +6,20 @@
     <meta content='main' name='layout' />
   </head>
   <div id='content'>
-    
     <g:link action='create' controller='project'>
       new project
     </g:link>
-    <div id='h1'>Project list</div>
+    <h1>Project list</h1>
     <g:each in='${projects}' var='project'>
-      <g:link action='show' controller='project' id='${project.id}'>
-        ${project.name}
-      </g:link>
+      <ul>
+        <li>
+          <g:link action='show' controller='project' id='${project.id}'>
+            ${project.name}
+          </g:link>
+          <br />
+          ${project.description}
+        </li>
+      </ul>
     </g:each>
   </div>
 </html>

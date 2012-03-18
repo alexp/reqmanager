@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title Requirement details
+    %meta(name="layout" content="main")
+
+
+  #content 
+    
+    ${flash.message}
+    req edit: ${requirement.id}
+    %form(name="update requirement" method="post")
+      %g:hiddenField(name="id" value="${requirement.id}")
+      .code
+        code:
+        %g:textField(name="code" value="${requirement.code}" style="width: 400px")
+      .desc
+        desc:
+        %g:textField(name="description" value="${requirement.description}" style="width: 400px")
+      .stat
+        stat:
+        %g:select(name="status.id" from="${statuses}" value="${requirement.status}" optionKey="id")
+
+      .usecases
+        %ul
+          %g:each(in="${requirement.useCases}" var="useCase")
+            %li
+              useCase.title
+            %li
+
+        %g:link(controller="useCase" action="create" id="${requirement.id}")
+          add use case
+      %g:actionSubmit(value="Zapisz" action="update")

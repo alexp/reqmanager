@@ -2,15 +2,19 @@ package pl.edu.pjwstk.reqmanager
 
 class Requirement {
 
-    static belongsTo = Project
     Project project
-
-    String name
+    Status status
+    String description 
+    String code
+        
+    static hasMany = [useCases : UseCase]
 
     static constraints = {
     }
 
     String toString() {
-      println name
+      println code + " " + 
+        status + " " + 
+        description 
     }
 }

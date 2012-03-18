@@ -4,13 +4,16 @@
     %title Welcome to Grails
     %meta(name="layout" content="main")
 
-
   #content 
-  
     %g:link(controller="project" action="create")
       new project
 
-    #h1 Project list
+    %h1 Project list
     %g:each(in="${projects}" var="project")
-      %g:link(controller="project" action="show" id="${project.id}")
-        ${project.name}
+      %ul
+        %li
+          %g:link(controller="project" action="show" id="${project.id}")
+            ${project.name}
+
+          %br
+          ${project.description}

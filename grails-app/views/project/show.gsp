@@ -16,6 +16,19 @@
       Opis: ${project.description}
     </p>
     <p>
+      Wymagania:
+      <g:each in='${project.requirements}' var='requirement'>
+        <ul class='req'>
+          <li>
+            ${requirement.code} | ${requirement.description} | ${requirement.status} |
+            <g:link action='edit' controller='requirement' id='${requirement.id}'>
+              edytuj
+            </g:link>
+          </li>
+        </ul>
+      </g:each>
+    </p>
+    <p>
       <g:link action='create' controller='requirement' params='[project_id : project.id]'>
         new requirement for this project
       </g:link>

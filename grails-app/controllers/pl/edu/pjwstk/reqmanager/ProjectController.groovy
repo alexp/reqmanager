@@ -2,6 +2,10 @@ package pl.edu.pjwstk.reqmanager
 
 class ProjectController {
 
+    def list = {
+      redirect(action:"index")        
+    }
+
     def index = {
       [projects : Project.list()]
     }
@@ -15,9 +19,7 @@ class ProjectController {
       project.timestamp = new java.sql.Timestamp(new java.util.Date().getTime())
 
       if(!project.save(flush:true)) {
-        flash.message = "nie udany zapis"
-        println "nie nie nie nie"
-        println project.errors
+        flash.message = "nieudany zapis: " + project.errors
         render(view: "create", model: [project : project])
         return
       }

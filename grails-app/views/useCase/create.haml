@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title Requirement details
+    %meta(name="layout" content="main")
+
+
+  #content 
+    
+    ${flash.message}
+    uc create
+    %g:form 
+      %g:hiddenField(name="requirement.id" value="${params.id}")
+      .title
+        title:
+        %g:textField(name="title", value="")
+      .code
+        code:
+        %g:textField(name="code", value="")
+      %br 
+      %g:if(test="${pl.edu.pjwstk.reqmanager.Actor.list().isEmpty()}")
+        dodaj nowego aktora:
+        %g:textField(name="actor.name")
+      %g:else
+        %g:select(name="actor.id" from="${pl.edu.pjwstk.reqmanager.Actor.list()}" optionKey="id" value="")
+
+      %g:actionSubmit(id="save" action="save" value="Save")
+      #container
