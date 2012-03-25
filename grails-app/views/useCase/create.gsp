@@ -13,11 +13,11 @@
       <g:hiddenField name='requirement.id' value='${params.id}'></g:hiddenField>
       <div class='title'>
         title:
-        <g:textField name='title"' value=''></g:textField>
+        <g:textField name='title' value=''></g:textField>
       </div>
       <div class='code'>
         code:
-        <g:textField name='code"' value=''></g:textField>
+        <g:textField name='code' value=''></g:textField>
       </div>
       <br />
       <g:if test='${pl.edu.pjwstk.reqmanager.Actor.list().isEmpty()}'>

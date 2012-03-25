@@ -13,10 +13,10 @@
       %g:hiddenField(name="requirement.id" value="${params.id}")
       .title
         title:
-        %g:textField(name="title", value="")
+        %g:textField(name="title" value="")
       .code
         code:
-        %g:textField(name="code", value="")
+        %g:textField(name="code" value="")
       %br 
       %g:if(test="${pl.edu.pjwstk.reqmanager.Actor.list().isEmpty()}")
         dodaj nowego aktora:

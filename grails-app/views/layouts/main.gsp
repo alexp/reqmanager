@@ -8,6 +8,7 @@
     <script type="text/javascript" src="${resource(dir: 'js', file:'UDCore.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file:'UDModules.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file:'application.js')}"></script>
+
     <g:layoutHead/>
       <r:layoutResources />
   </head>

@@ -141,3 +141,25 @@ canvas.ud_diagram_canvas {
 
 
 
+/*********************
+ delete button
+**********************/
+div#ud_delete_div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  
+  width: 15px;
+  height: 15px;
+  
+  border: 1px solid black;
+  border-right: none;
+  border-top: none;
+  
+  background: url('../img/app/delete_button.png') no-repeat;
+}
+
+div#ud_delete_div:hover {
+  background-color: #fff4ac;
+}
+

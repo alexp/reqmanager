@@ -24,6 +24,9 @@
             <g:link action='edit' controller='requirement' id='${requirement.id}'>
               edytuj
             </g:link>
+            <g:link action='show' controller='requirement' id='${requirement.id}'>
+              pokaz
+            </g:link>
           </li>
         </ul>
       </g:each>

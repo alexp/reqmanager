@@ -3,12 +3,6 @@ package pl.edu.pjwstk.reqmanager
 class RequirementController {
   
   def create = {
-    Status s1 = new Status(name:"must-have")
-    Status s2 = new Status(name:"optional")
-
-    s1.save(flush: true)
-    s2.save(flush: true)
-
     [requirement : new Requirement(), statuses:Status.list()]
   }
 
@@ -34,6 +28,12 @@ class RequirementController {
 
   def edit = {
     def requirement = Requirement.get(params.id)
+
+    if(!requirement) {
+      flash.message = "Requirement ${params.id} not found"
+      redirect(controller: "project", action:"index")
+    }
+
     [requirement : requirement, statuses:Status.list()]
   }
 
@@ -59,6 +59,10 @@ class RequirementController {
       flash.message = "Requirement with id ${params.id} not found"
       redirect(action:"edit", id:params.id)
     }
+  }
+
+  def show = {
+    [requirement : Requirement.get(params.id)] 
   }
 }
 

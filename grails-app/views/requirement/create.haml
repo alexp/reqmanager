@@ -11,8 +11,14 @@
 
     %g:form(action="save" method="post")
       %g:hiddenField(name="project.id" value="${params.project_id}")
-      %g:textField(name="description" value="")      
-      %g:textField(name="code" value="")
+      .code
+        code:
+        %g:textField(name="code" value="")
+
+      .desc
+        description:
+        %g:textField(name="description" value="")      
+
       %g:select(id="statusesSelect" name="status.id" from="${statuses}" value="" optionKey="id")
       %g:actionSubmit(id="save" action="save" value="Save")
 

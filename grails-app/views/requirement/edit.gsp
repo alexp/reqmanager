@@ -27,9 +27,8 @@
         <ul>
           <g:each in='${requirement.useCases}' var='useCase'>
             <li>
-              useCase.title
+              ${useCase.title}
             </li>
-            <li></li>
           </g:each>
         </ul>
         <g:link action='create' controller='useCase' id='${requirement.id}'>

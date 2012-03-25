@@ -21,6 +21,8 @@
             ${requirement.code} | ${requirement.description} | ${requirement.status} | 
             %g:link(controller="requirement" action="edit" id="${requirement.id}")
               edytuj
+            %g:link(controller="requirement" action="show" id="${requirement.id}")
+              pokaz 
     %p
       %g:link(controller="requirement" action="create" params="[project_id : project.id]")
         new requirement for this project

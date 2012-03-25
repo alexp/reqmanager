@@ -25,8 +25,7 @@
         %ul
           %g:each(in="${requirement.useCases}" var="useCase")
             %li
-              useCase.title
-            %li
+              ${useCase.title}
 
         %g:link(controller="useCase" action="create" id="${requirement.id}")
           add use case

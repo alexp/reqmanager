@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %title Requirement details
+    %meta(name="layout" content="main")
+
+
+  #content 
+
+    ${flash.message}
+  
+    %h1
+      Requirement #${requirement.id}
+
+    .code
+      code: ${requirement.code}
+
+    .desc
+      description: ${requirement.description}
+
+    .status
+      status: ${requirement.status}
+
+    .useCases
+      %g:if(test="${requirement.useCases}")
+        %h2
+          Use Cases:
+        %ul
+          %g:each(in="${requirement.useCases}" var="${useCase}")
+            %li
+              .code
+                code: ${useCase.code}
+              .title
+                title: ${useCase.title}
+              .actor
+                actor: ${useCase.primaryActor.name}
+              .xml
+                xml: ${useCase.diagramXml}
+
+              %g:link(controller="useCase" action="edit" id="${useCase.id}")
+                edytuj
+                
+    #container
+

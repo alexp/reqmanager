@@ -6,6 +6,9 @@
     <meta content='main' name='layout' />
   </head>
   <div id='content'>
+    
+    ${flash.message}
+    
     <g:link action='create' controller='project'>
       new project
     </g:link>

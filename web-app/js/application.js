@@ -1,69 +1,52 @@
-if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
-			$(this).fadeIn();
-		}).ajaxStop(function() {
-			$(this).fadeOut();
-		});
-	})(jQuery);
-}
+var Cunt = function(elementId) {
+  this.parent = document.getElementById(elementId); 
 
-window.onload = init
+  var submit = document.getElementById('submitbtn');
+  var xmlstr = document.getElementById('diagramXml').value;
 
-function init() {
-
-  var diagram = document.createElement('div');
-  var container = document.getElementById('container')
-
-  console.log('to dziala');
-
-  if(container != null) { 
-    console.log('container jest')
-    var canvas;
-    canvas = document.createElement('canvas');
-    canvas.setAttribute( 'class', 'ud_diagram_canvas' );
-    canvas.width = "600";
-    canvas.height = "600";
+  submit.onclick = function() {
+    console.log('submit leci');
+    var hiddenField = document.getElementById('diagramXml');
+    hiddenField.value = ucDiag.getXMLString();
+    xmlstr = hiddenField.value;
     
-    diagram.appendChild(canvas);
-    
-    var context = canvas.getContext('2d');
-
-    //motion canvas
-    canvas = document.createElement( 'canvas' );
-    canvas.setAttribute( 'class', 'ud_diagram_canvas' );
-    canvas.width = "600"; 
-    canvas.height = "600";
-    canvas.onmousedown = function() { return false; }
-
-    //diagram.appendChild(canvas);
-    var motion_context = canvas.getContext('2d');
-
-    //var umldiag = new UMLClassDiagram(container, 600, 600); 
-    var umldiag = new UMLUseCaseDiagram(container, 600, 600);
-    //umldiag.initialize(100, diagram, context, motion_context, 600, 600)
-    umldiag.setUpdateHeightCanvas(true);
-    umldiag.addElement(new UMLUseCase({0:0, 0:0}));
-    umldiag.addElement(new UMLUseCase({0:0, 0:0}));
-
-    console.log('test 5');
-
-    context.clearRect( 0, 0, 300, 300);
-    motion_context.clearRect( 0, 0, 300, 300);
-
-    umldiag.draw();
-    umldiag.interaction(true);
-
-    //container.appendChild(diagram);
-
-    umldiag._alone = true
-    console.log(umldiag.getXMLString());
-
-    var button = document.createElement('button');
-    button.setAttribute('name', 'button');
-    button.setAttribute('value', 'clickme');
-    button.onmousedown = function() { alert(umldiag.getXMLString());  }
-
-    diagram.appendChild(button);
   }
+
+  //var ucDiag = new UMLUseCaseDiagram({id: 'ud_diagram_div', width: '600', height: '300'});
+  var ucDiag = new UMLUseCaseDiagram();
+  ucDiag._alone = true;
+
+  if(xmlstr) {
+    ucDiag.setXMLString(xmlstr);
+  }
+  
+  var c1 = document.getElementById('c1');
+  var c = c1.getContext('2d');
+  var c2 = document.getElementById('c2');
+  c2.onmousedown = function() { return false; };
+  var mc = c2.getContext('2d');
+  
+  var div = document.getElementById('ud_diagram_div');
+
+  if( JSFun.isNumber( 10 ) &&
+      div.nodeName == 'DIV' &&
+      c instanceof CanvasRenderingContext2D &&
+      mc instanceof CanvasRenderingContext2D &&
+      600 > 0 &&
+      300 > 0 )
+  {      
+    console.log('TRUE');
+  }
+  console.log(ucDiag.initialize(10, div, c, mc, 600, 300));
+  ucDiag.setUpdateHeightCanvas(true);
+
+  var button = document.getElementById('addElement');
+  button.onclick = function() {
+    ucDiag.addElement(UMLUseCase({x:20, y: 140}));
+    ucDiag.draw();
+  }
+
+  ucDiag.draw();
+  ucDiag.interaction(true);
+  console.log('done');
 }

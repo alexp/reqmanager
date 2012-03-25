@@ -11,8 +11,14 @@
     
     <g:form action='save' method='post'>
       <g:hiddenField name='project.id' value='${params.project_id}'></g:hiddenField>
-      <g:textField name='description' value=''></g:textField>
-      <g:textField name='code' value=''></g:textField>
+      <div class='code'>
+        code:
+        <g:textField name='code' value=''></g:textField>
+      </div>
+      <div class='desc'>
+        description:
+        <g:textField name='description' value=''></g:textField>
+      </div>
       <g:select from='${statuses}' id='statusesSelect' name='status.id' optionKey='id' value=''></g:select>
       <g:actionSubmit action='save' id='save' value='Save'></g:actionSubmit>
     </g:form>
