@@ -1,4 +1,4 @@
-var App = function(elementId) {
+var AppUseCase = function(elementId) {
   this.parent = document.getElementById(elementId); 
 
   var submit = document.getElementById('submitbtn');
@@ -28,16 +28,7 @@ var App = function(elementId) {
   
   var div = document.getElementById('ud_diagram_div');
 
-  if( JSFun.isNumber( 10 ) &&
-      div.nodeName == 'DIV' &&
-      c instanceof CanvasRenderingContext2D &&
-      mc instanceof CanvasRenderingContext2D &&
-      600 > 0 &&
-      300 > 0 )
-  {      
-    console.log('TRUE');
-  }
-  console.log(ucDiag.initialize(10, div, c, mc, 600, 300));
+  console.log(ucDiag.initialize(10, div, c, mc, 600, 1000));
   ucDiag.setUpdateHeightCanvas(true);
 
   var button = document.getElementById('addElement');
@@ -46,7 +37,74 @@ var App = function(elementId) {
     ucDiag.draw();
   }
 
+  button = document.getElementById('addInclude');
+
+  button.onclick = function(e) {
+    var x1 = 0, y1 = 0;
+    ucDiag.interaction(false);
+    var first = true;
+
+
+    var doubleClick = function(e) {
+
+      var mousex = event.pageX - div.offsetLeft;
+      var mousey = event.pageY - div.offsetTop;
+
+      if(first) {
+        first = false;
+        console.log('first click');
+        x1 = mousex;
+        y1 = mousey;
+      } else {
+        console.log('second click');
+        ucDiag.addRelationFromPoints(new UMLInclude(), x1, y1, mousex, mousey);
+        div.onclick = false;
+
+        ucDiag.draw();
+        ucDiag.interaction(true);
+      }
+    }
+
+    div.onclick = doubleClick;
+  }
+
+  button = document.getElementById('addExtend');
+
+  button.onclick = function(e) {
+    var x1 = 0, y1 = 0;
+    ucDiag.interaction(false);
+    var first = true;
+
+
+    var doubleClick = function(e) {
+
+      var mousex = event.pageX - div.offsetLeft;
+      var mousey = event.pageY - div.offsetTop;
+
+      if(first) {
+        first = false;
+        console.log('first click');
+        x1 = mousex;
+        y1 = mousey;
+      } else {
+        console.log('second click');
+        ucDiag.addRelationFromPoints(new UMLExtend(), x1, y1, mousex, mousey);
+        div.onclick = false;
+
+        ucDiag.draw();
+        ucDiag.interaction(true);
+      }
+    }
+
+    div.onclick = doubleClick;
+  }
+
   ucDiag.draw();
   ucDiag.interaction(true);
+  this.diagram = ucDiag;
   console.log('done');
+}
+
+App.prototype.doubleClick = function() {
+   
 }

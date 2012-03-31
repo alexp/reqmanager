@@ -9,7 +9,7 @@
     //<![CDATA[
       window.onload = function() {
         // init empty diagram here and add some functionalities
-          var diag = new Cunt("container"); 
+          var diag = new AppUseCase("container"); 
         // init the diagram with xml structure here
       }
     //]]>
@@ -46,11 +46,17 @@
       <button id='addElement'>
         dodaj element
       </button>
+      <button id='addInclude'>
+        dodaj include
+      </button>
+      <button id='addExtend'>
+        dodaj extend
+      </button>
     </div>
     <div id='ud_container_div' style='border: 1px solid #000;'>
       <div id='ud_diagram_div' style='position: relative;'>
-        <canvas class='ud_diagram_canvas' id='c1' style='position: absolute;'></canvas>
-        <canvas class='ud_diagram_canvas' id='c2' style='position: absolute;'></canvas>
+        <canvas class='ud_diagram_canvas' id='c1' style='position: absolute;' width='1000'></canvas>
+        <canvas class='ud_diagram_canvas' id='c2' style='position: absolute;' width='1000'></canvas>
       </div>
       <br style='clear: both;' />
     </div>
