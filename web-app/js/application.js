@@ -1,4 +1,4 @@
-var Cunt = function(elementId) {
+var App = function(elementId) {
   this.parent = document.getElementById(elementId); 
 
   var submit = document.getElementById('submitbtn');

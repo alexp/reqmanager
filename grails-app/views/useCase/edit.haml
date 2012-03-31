@@ -7,7 +7,7 @@
   :javascript
     window.onload = function() {
       // init empty diagram here and add some functionalities
-        var diag = new Cunt("container"); 
+        var diag = new App("container"); 
       // init the diagram with xml structure here
     }
     
@@ -38,6 +38,8 @@
     #menu
       %button(id="addElement")
         dodaj element
+      %button(id="addRelation")
+        dodaj relację 
     #ud_container_div(style="border: 1px solid #000;")
       #ud_diagram_div(style="position: relative;")
         %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;")
