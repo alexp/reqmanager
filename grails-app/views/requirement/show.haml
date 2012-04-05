@@ -5,6 +5,12 @@
     %meta(name="layout" content="main")
 
 
+  :javascript
+    window.onload = function() {
+      // init empty diagram here and add some functionalities
+        var diag = new AppUseCaseRO("container"); 
+      // init the diagram with xml structure here
+    }
   #content 
 
     ${flash.message}
@@ -21,6 +27,11 @@
     .status
       status: ${requirement.status}
 
+    %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
+
+    %g:link(controller="requirement" action="generateFromXml" id="${params.id}")
+      generate structure from diagram
+
     .useCases
       %g:if(test="${requirement.useCases}")
         %h2
@@ -28,17 +39,22 @@
         %ul
           %g:each(in="${requirement.useCases}" var="${useCase}")
             %li
+              .id
+                id: ${useCase.id}
               .code
                 code: ${useCase.code}
               .title
                 title: ${useCase.title}
               .actor
-                actor: ${useCase.primaryActor.name}
-              .xml
-                xml: ${useCase.diagramXml}
-
-              %g:link(controller="useCase" action="edit" id="${useCase.id}")
-                edytuj
-                
+                actor: ${useCase.actors}
+              .maincontent
+                maincontent: ${useCase.mainContent}
+    %g:link(controller="requirement" action="edit" id="${params.id}")
+      edytuj
     #container
+      #ud_container_div(style="border: 1px solid #000;")
+        #ud_diagram_div(style="position: relative;")
+          %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="1000")
+          %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="1000")
+        %br(style="clear: both;")
 

@@ -4,9 +4,11 @@ class UseCase {
   
     String title
     String code
-    Actor primaryActor
+    //Actor primaryActor
     String diagramXml
+    String mainContent
     
+    static hasMany = [actors : Actor]
     static belongsTo = [requirement : Requirement]
 
     static mapping = {
@@ -15,5 +17,6 @@ class UseCase {
     
     static constraints = {
       diagramXml(nullable: true)
+      mainContent(nullable: true)
     }
 }

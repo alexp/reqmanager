@@ -3,14 +3,7 @@
   %head
     %title Requirement details
     %meta(name="layout" content="main")
-
-  :javascript
-    window.onload = function() {
-      // init empty diagram here and add some functionalities
-        var diag = new AppUseCase("container"); 
-      // init the diagram with xml structure here
-    }
-    
+ 
   #content 
 
     ${flash.message}
@@ -27,23 +20,13 @@
         title: 
         %g:textField(name="title" value="${useCase.title}")
       .actor
-        actor: 
-        %g:select(name="primaryActor.id" value="${useCase.primaryActor}" from="${pl.edu.pjwstk.reqmanager.Actor.list()}" optionKey="id")
+        actors: 
+        %g:select(name="actors" value="${useCase.actors}" from="${pl.edu.pjwstk.reqmanager.Actor.list()}" optionKey="id")
+      .maincontent
+        main content:
+        %g:textArea(name="description" value="${useCase.mainContent}" style="width: 400px")
       .xml
         xml:
         /%g:textArea(id="xmlValue" name="diagramXml" value="${useCase.diagramXml}")
         %g:hiddenField(id='diagramXml' name="diagramXml" value="${useCase.diagramXml}")
-      %g:actionSubmit(value="Zapisz" action="update" id="submitbtn")
-
-    #menu
-      %button(id="addElement")
-        dodaj element
-      %button(id="addInclude")
-        dodaj include 
-      %button(id="addExtend")
-        dodaj extend 
-    #ud_container_div(style="border: 1px solid #000;")
-      #ud_diagram_div(style="position: relative;")
-        %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="1000")
-        %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="1000")
-      %br(style="clear: both;")
+      %g:actionSubmit(value="Save" action="update" id="submitbtn")

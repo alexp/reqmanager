@@ -5,6 +5,13 @@
     <title>Requirement details</title>
     <meta content='main' name='layout' />
   </head>
+  <script type='text/javascript'>
+    //<![CDATA[
+      window.onload = function() {
+        var app = AppUseCase("ud_diagram_div");
+      }
+    //]]>
+  </script>
   <div id='content'>
     
     ${flash.message}
@@ -35,7 +42,41 @@
           add use case
         </g:link>
       </div>
-      <g:actionSubmit action='update' value='Zapisz'></g:actionSubmit>
+      <div class='xml'>
+        xml:
+        <g:hiddenField id='diagramXml' name='diagramXml' value='${requirement.diagramXml}'></g:hiddenField>
+      </div>
+      <g:actionSubmit action='update' id='submitbtn' value='Save'></g:actionSubmit>
     </form>
+    <div id='menu'>
+      <button id='addActor'>
+        add actor
+      </button>
+      <button id='addElement'>
+        add element
+      </button>
+      <button id='addInclude'>
+        add include
+      </button>
+      <button id='addExtend'>
+        add extend
+      </button>
+      <button id='addSystem'>
+        add system boundries
+      </button>
+      <button id='addCommunication'>
+        add communication
+      </button>
+      <button id='deleteElement'>
+        X
+      </button>
+    </div>
+    <div id='ud_container_div' style='border: 1px solid #000;'>
+      <div id='ud_diagram_div' style='position: relative;'>
+        <canvas class='ud_diagram_canvas' id='c1' style='position: absolute;' width='1000'></canvas>
+        <canvas class='ud_diagram_canvas' id='c2' style='position: absolute;' width='1000'></canvas>
+      </div>
+      <br style='clear: both;' />
+    </div>
   </div>
 </html>

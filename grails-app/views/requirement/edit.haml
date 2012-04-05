@@ -4,6 +4,10 @@
     %title Requirement details
     %meta(name="layout" content="main")
 
+  :javascript
+    window.onload = function() {
+      var app = AppUseCase("ud_diagram_div");
+    }
 
   #content 
     
@@ -29,4 +33,29 @@
 
         %g:link(controller="useCase" action="create" id="${requirement.id}")
           add use case
-      %g:actionSubmit(value="Zapisz" action="update")
+      .xml
+        xml:
+        %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
+      %g:actionSubmit(value="Save" action="update" id="submitbtn")
+
+    #menu
+      %button(id="addActor")
+        add actor 
+      %button(id="addElement")
+        add element
+      %button(id="addInclude")
+        add include 
+      %button(id="addExtend")
+        add extend 
+      %button(id="addSystem")
+        add system boundries
+      %button(id="addCommunication")
+        add communication
+
+      %button(id="deleteElement")
+        X 
+    #ud_container_div(style="border: 1px solid #000;")
+      #ud_diagram_div(style="position: relative;")
+        %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="1000")
+        %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="1000")
+      %br(style="clear: both;")

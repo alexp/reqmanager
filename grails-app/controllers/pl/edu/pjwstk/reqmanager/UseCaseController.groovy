@@ -11,8 +11,8 @@ class UseCaseController {
       def useCase = new UseCase(params)
       def actor = new Actor(params.actor)
 
-      if(actor) {
-        useCase.primaryActor = actor
+      if(actor && !useCase.actors.contains(actor)) {
+        useCase.addToActors(actor)
       }
 
       if(!useCase.save(flush: true)) {

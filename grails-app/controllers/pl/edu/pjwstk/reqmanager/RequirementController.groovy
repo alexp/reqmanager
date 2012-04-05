@@ -44,6 +44,7 @@ class RequirementController {
     println params
 
     if(requirement) {
+      params.diagramXml = params.diagramXml.trim()
       requirement.properties = params
 
       if(!requirement.hasErrors() && requirement.save()) {
@@ -63,6 +64,20 @@ class RequirementController {
 
   def show = {
     [requirement : Requirement.get(params.id)] 
+  }
+
+  def generateFromXml() {
+    def requirement = Requirement.get(params.id)
+
+    requirement.generateFromXml()
+    if(requirement.save(flush:true)) {
+      flash.message = "saved objects from xml"
+    } else {
+      flash.message = "error while saving objects from xml"
+      println requirement.errors
+    }
+
+    redirect(controller:"requirement", action:"show", id:params.id)
   }
 }
 

@@ -4,7 +4,8 @@ class Actor {
 
     String name
 
-    static belongsTo = [useCase : UseCase]
+    static belongsTo = UseCase
+    static hasMany = [useCases : UseCase]
     static constraints = {
     }
 }
