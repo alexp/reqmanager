@@ -1,3 +1,8 @@
+$(document).ready(function() {
+  console.log('jquery initialized');
+});
+
+// read-only version for requirement view
 var AppUseCaseRO = function(elementId) {
 
   this.parent = document.getElementById(elementId); 
