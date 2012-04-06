@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="Grails"/></title>
     <r:require module="application" />
+    <r:require modules="bootstrap" />
     <g:layoutHead/>
     <r:layoutResources />
   </head>
