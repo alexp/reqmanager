@@ -16,7 +16,11 @@
     ${flash.message}
   
     %h1
-      Requirement #${requirement.id}
+      ${requirement.title} #${requirement.id}
+
+    %span(class="badge badge-warning")
+      ${requirement.useCases.size()}
+    use cases
 
     .code
       code: ${requirement.code}
@@ -49,6 +53,9 @@
                 actor: ${useCase.actors}
               .maincontent
                 maincontent: ${useCase.mainContent}
+              .actions
+                %g:link(controller="useCase" action="edit" id="${useCase.id}")
+                  edit
     %g:link(controller="requirement" action="edit" id="${params.id}")
       edytuj
     #container

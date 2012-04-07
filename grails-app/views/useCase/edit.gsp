@@ -28,7 +28,15 @@
       </div>
       <div class='maincontent'>
         main content:
-        <g:textArea name='description' style='width: 400px' value='${useCase.mainContent}'></g:textArea>
+        <g:textArea name='mainContent' style='width: 400px' value='${useCase.mainContent}'></g:textArea>
+      </div>
+      <div class='basicFlow'>
+        basicFlow:
+        <g:textArea name='basicFlow' style='width: 400px' value='${useCase.mainContent}'></g:textArea>
+      </div>
+      <div class='alterFlow'>
+        alterFlow:
+        <g:textArea name='alterFlow' style='width: 400px' value='${useCase.alterFlow}'></g:textArea>
       </div>
       <div class='xml'>
         xml:

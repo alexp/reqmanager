@@ -24,7 +24,13 @@
         %g:select(name="actors" value="${useCase.actors}" from="${pl.edu.pjwstk.reqmanager.Actor.list()}" optionKey="id")
       .maincontent
         main content:
-        %g:textArea(name="description" value="${useCase.mainContent}" style="width: 400px")
+        %g:textArea(name="mainContent" value="${useCase.mainContent}" style="width: 400px")
+      .basicFlow
+        basicFlow:
+        %g:textArea(name="basicFlow" value="${useCase.mainContent}" style="width: 400px")
+      .alterFlow
+        alterFlow:
+        %g:textArea(name="alterFlow" value="${useCase.alterFlow}" style="width: 400px")
       .xml
         xml:
         /%g:textArea(id="xmlValue" name="diagramXml" value="${useCase.diagramXml}")

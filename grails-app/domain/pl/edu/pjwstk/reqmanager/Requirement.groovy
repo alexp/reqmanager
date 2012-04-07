@@ -4,6 +4,7 @@ class Requirement {
 
     Project project
     Status status
+    String title 
     String description 
     String code
     String diagramXml
@@ -16,6 +17,7 @@ class Requirement {
 
     static constraints = {
       diagramXml(nullable: true)
+      title(nullable: true)
     }
 
     String toString() {

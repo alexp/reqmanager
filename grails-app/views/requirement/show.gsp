@@ -19,8 +19,13 @@
     ${flash.message}
     
     <h1>
-      Requirement #${requirement.id}
+      ${requirement.title} #${requirement.id}
     </h1>
+    <span class='badge badge-warning'>
+      ${requirement.useCases.size()}
+    </span>
+    use cases
+    
     <div class='code'>
       code: ${requirement.code}
     </div>
@@ -56,6 +61,11 @@
               </div>
               <div class='maincontent'>
                 maincontent: ${useCase.mainContent}
+              </div>
+              <div class='actions'>
+                <g:link action='edit' controller='useCase' id='${useCase.id}'>
+                  edit
+                </g:link>
               </div>
             </li>
           </g:each>

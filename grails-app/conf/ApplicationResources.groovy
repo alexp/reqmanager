@@ -1,6 +1,6 @@
 modules = {
     application {
-        dependsOn 'jquery, jsuml2'
+        dependsOn 'jquery, jsuml2, showdown'
         resource url:'js/application.js'
     }
 
@@ -8,5 +8,9 @@ modules = {
         resource url: 'css/UDStyle.css'  
         resource url: 'js/UDCore.js'  
         resource url: 'js/UDModules.js'  
+    }
+
+    showdown {
+        resource url: 'js/showdown.js'  
     }
 } 
