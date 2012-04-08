@@ -5,6 +5,38 @@
     <title>Requirement details</title>
     <meta content='main' name='layout' />
   </head>
+  <r:require module='ace'></r:require>
+  <script type='text/javascript'>
+    //<![CDATA[
+      window.onload = function() {
+      
+        $('textarea[class="hideme"]').hide();
+      
+        $(".editor").each(function() {
+          console.log(this.id);
+          var editor = ace.edit(this.id);
+          editor.setTheme("ace/theme/clouds_midnight");
+          var MarkdownMode = require("ace/mode/markdown").Mode;
+          editor.getSession().setMode(new MarkdownMode());
+          editor.getSession().setUseWrapMode(true);
+          var submit = $("#submitbtn");
+      
+          var that = this;
+      
+          submit.click(function() {
+            var txtName = that.id.split("-")[0];
+            console.log(txtName);
+            var textarea = $("textarea[id='"+txtName+"']");
+            console.log(editor.getSession().getValue());
+            textarea.val(editor.getSession().getValue());
+            console.log(textarea);
+            console.log(textarea.val());
+          });
+        });
+      
+      };
+    //]]>
+  </script>
   <div id='content'>
     
     ${flash.message}
@@ -26,17 +58,28 @@
         actors:
         <g:select from='${pl.edu.pjwstk.reqmanager.Actor.list()}' name='actors' optionKey='id' value='${useCase.actors}'></g:select>
       </div>
-      <div class='maincontent'>
-        main content:
-        <g:textArea name='mainContent' style='width: 400px' value='${useCase.mainContent}'></g:textArea>
-      </div>
-      <div class='basicFlow'>
-        basicFlow:
-        <g:textArea name='basicFlow' style='width: 400px' value='${useCase.mainContent}'></g:textArea>
-      </div>
-      <div class='alterFlow'>
-        alterFlow:
-        <g:textArea name='alterFlow' style='width: 400px' value='${useCase.alterFlow}'></g:textArea>
+      <div id='text-areas'>
+        <div class='text'>
+          main content:
+          <div class='editor' id='main-content-editor'>
+            ${useCase.mainContent}
+          </div>
+          <g:textArea class='hideme' id='main' name='mainContent' value='${useCase.mainContent}'></g:textArea>
+        </div>
+        <div class='text'>
+          basicFlow:
+          <div class='editor' id='basic-flow-editor'>
+            ${useCase.basicFlow}
+          </div>
+          <g:textArea class='hideme' id='basic' name='basicFlow' value='${useCase.basicFlow}'></g:textArea>
+        </div>
+        <div class='text'>
+          alterFlow:
+          <div class='editor' id='alter-flow-editor'>
+            ${useCase.alterFlow}
+          </div>
+          <g:textArea class='hideme' id='alter' name='alterFlow' value='${useCase.alterFlow}'></g:textArea>
+        </div>
       </div>
       <div class='xml'>
         xml:

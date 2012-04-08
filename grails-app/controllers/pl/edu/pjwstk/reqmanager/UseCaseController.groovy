@@ -42,6 +42,8 @@ class UseCaseController {
     def update = {
       def useCase = UseCase.get(params.id)
 
+      println params
+
       if(!useCase) {
         flash.message = "Use Case ${params.id} not found!"
 
@@ -54,7 +56,7 @@ class UseCaseController {
 
       if(!useCase.hasErrors() && useCase.save(flush:true)) {
         flash.message = "Successfully updated use case ${params.id}"
-        render(view:"edit", model:[useCase:useCase])
+        redirect(action:"edit", id:useCase.id)
       } else {
         flash.message = "Error writing useCase ${params.id}"
       }

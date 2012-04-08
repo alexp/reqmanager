@@ -10,6 +10,7 @@
       window.onload = function() {
         // init empty diagram here and add some functionalities
           var diag = new AppUseCaseRO("container"); 
+          var converter = new Showdown.converter();
         // init the diagram with xml structure here
       }
     //]]>
@@ -60,7 +61,13 @@
                 actor: ${useCase.actors}
               </div>
               <div class='maincontent'>
-                maincontent: ${useCase.mainContent}
+                <script type='text/javascript'>
+                  //<![CDATA[
+                    var text = converter.makeHtml(${useCase.mainContent});
+                    console.log(text)
+                  //]]>
+                </script>
+                maincontent: todo
               </div>
               <div class='actions'>
                 <g:link action='edit' controller='useCase' id='${useCase.id}'>
