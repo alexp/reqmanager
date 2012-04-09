@@ -8,15 +8,18 @@ class Requirement {
     String description 
     String code
     String diagramXml
+    String classDiagramXml
         
     static hasMany = [useCases : UseCase]
 
     static mapping = {
       diagramXml type: SQLXMLType
+      classDiagramXml type: SQLXMLType
     }
 
     static constraints = {
       diagramXml(nullable: true)
+      classDiagramXml(nullable: true)
       title(nullable: true)
     }
 
@@ -36,13 +39,13 @@ class Requirement {
       def useCases = xml.UMLSystem.UMLUseCase.item.each { xmlItem -> 
         def useCase = UseCase.findByTitle(xmlItem.@value.text())
         if(useCase != null) {
+          println useCase
           if(!this.useCases.contains(useCase)) {
-            this.addToUseCases(UseCase.get(useCase))
+            this.addToUseCases(UseCase.get(useCase.id))
           }
         } else {
           this.addToUseCases(new UseCase(title: xmlItem.@value.text(), code: "newUC")) 
         }
       }
-
     }
 }

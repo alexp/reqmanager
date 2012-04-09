@@ -4,19 +4,42 @@
     %title Welcome to Grails
     %meta(name="layout" content="main")
 
-  #content 
+  .container-fluid
+    .row-fluid
+      .span2.well
+        %ul.nav.nav-list
+          %li.nav-header
+            Menu
+          %li
+            %g:link(controller="project" action="create") new project
+      .span9.well
 
-    ${flash.message}
+        %h1 Project list
+        %ul.thumbnails
+          %g:each(in="${projects}" var="project")
+            %li.span3
+              .thumbnail
+                .caption
+                  %p
+                    %h3
+                      %g:link(controller="project" action="show" id="${project.id}") ${project.name}
+                      %span.label.label-info
+                        ${project.deadline.format("dd-MM yy")}
 
-    %g:link(controller="project" action="create")
-      new project
-
-    %h1 Project list
-    %g:each(in="${projects}" var="project")
-      %ul
-        %li
-          %g:link(controller="project" action="show" id="${project.id}")
-            ${project.name}
-
-          %br
-          ${project.description}
+                  %p
+                    ${project.description}
+                  %p
+                    %span.badge.badge-inverse ${project.requirements.size()}
+                    %g:if(test="${project.requirements.size() == 1}")
+                      requirement
+                    %g:else
+                      requirements
+                  %p
+                    %span.badge.badge-inverse ${project.countUseCases()}
+                    use cases 
+                  %p
+                    %g:link(action="show" class="btn" id="${project.id}")
+                      Check details
+                    or
+                    %g:link(action="edit" id="${project.id}")
+                      edit project

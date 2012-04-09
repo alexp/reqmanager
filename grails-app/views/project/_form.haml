@@ -1,9 +1,19 @@
 %g:form(method="post")
+  %g:hiddenField(name="id" value="${project?.id}")
+
   Name:
   %g:textField(name="name" value="${project?.name}")
-  %br
 
   Description:
-  %g:textField(name="description" value="${project?.description}")
+  %g:textArea(name="description" value="${project?.description}")
 
-  %g:actionSubmit(id="save" action="save" value="Save")
+  mainNote:
+  %g:textArea(name="mainNote" value="${project?.mainNote}")
+
+  Deadline:
+  %g:datePicker(name="deadline" value="${project?.deadline}" precision="day")
+
+  %g:if(test="${params.action == 'edit'}")
+    %g:actionSubmit(id="update" action="update" value="Update")
+  %g:if(test="${params.action == 'create'}")
+    %g:actionSubmit(id="save" action="save" value="Save")

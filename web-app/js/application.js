@@ -36,7 +36,7 @@ var AppUseCase = function(elementId) {
   var xmlstr = document.getElementById('diagramXml').value;
 
   submit.onclick = function() {
-    console.log('submit leci');
+    console.log('submit leci z use case');
     var hiddenField = document.getElementById('diagramXml');
     hiddenField.value = ucDiag.getXMLString();
     xmlstr = hiddenField.value;
@@ -59,7 +59,7 @@ var AppUseCase = function(elementId) {
   
   var div = document.getElementById('ud_diagram_div');
 
-  console.log(ucDiag.initialize(10, div, c, mc, 600, 1000));
+  console.log(ucDiag.initialize(11, div, c, mc, 600, 1000));
   ucDiag.setUpdateHeightCanvas(true);
 
   var button = document.getElementById('addElement');
@@ -233,4 +233,136 @@ var AppUseCase = function(elementId) {
   ucDiag.interaction(true);
   this.diagram = ucDiag;
   console.log('done');
+}
+
+var AppClassDiagram = function(elementId) {
+  var submit = document.getElementById('submitbtn');
+  var xmlstr = document.getElementById('classDiagramXml').value;
+
+  submit.onclick = function() {
+    console.log('submit leci z diagramu klas');
+    var hiddenField = document.getElementById('classDiagramXml');
+    hiddenField.value = ucDiag.getXMLString();
+    xmlstr = hiddenField.value;
+  }
+
+  var ucDiag = new UMLClassDiagram();
+  ucDiag._alone = true;
+
+  if(xmlstr) {
+    ucDiag.setXMLString(xmlstr);
+  }
+  
+  var c1 = document.getElementById('c11');
+  var c = c1.getContext('2d');
+  var c2 = document.getElementById('c22');
+  c2.onmousedown = function() { return false; };
+  var mc = c2.getContext('2d');
+  
+  var div = document.getElementById('ud2_diagram_div');
+
+  console.log(ucDiag.initialize(10, div, c, mc, 600, 1000));
+  ucDiag.setUpdateHeightCanvas(true);
+
+  button = document.getElementById('CDdeleteElement');
+  button.onclick = function(e) {
+    ucDiag.interaction(false);
+
+    var singleClick = function(e) {
+      var mousex = event.pageX - div.offsetLeft;
+      var mousey = event.pageY - div.offsetTop;
+
+      ucDiag.delElement(ucDiag.getElementByPoint(mousex, mousey));
+      div.onclick = false;
+
+      ucDiag.draw();
+      ucDiag.interaction(true);
+      //return false;
+    }
+    div.onclick = singleClick;
+  }
+
+  button = document.getElementById('addClass');
+  button.onclick = function(e) {
+    ucDiag.interaction(false);
+
+    var singleClick = function(e) {
+
+      var mousex = event.pageX - div.offsetLeft;
+      var mousey = event.pageY - div.offsetTop;
+
+      ucDiag.addElement(new UMLClass({x:mousex, y:mousey}));
+      div.onclick = false;
+
+      ucDiag.draw();
+      ucDiag.interaction(true);
+    }
+
+    div.onclick = singleClick;
+  }
+
+  button = document.getElementById('addAssoc');
+  button.onclick = function(e) {
+    
+    var x1 = 0, y1 = 0;
+    ucDiag.interaction(false);
+    var first = true;
+
+    document.getElementById(div.id).style.cursor = "crosshair";
+    
+    var doubleClick = function(e) {
+
+      var mousex = event.pageX - div.offsetLeft;
+      var mousey = event.pageY - div.offsetTop;
+
+      if(first) {
+        first = false;
+        console.log('first click');
+        x1 = mousex;
+        y1 = mousey;
+      } else {
+        console.log('second click');
+        ucDiag.addRelationFromPoints(new UMLAssociation(), x1, y1, mousex, mousey);
+        div.onclick = false;
+
+        ucDiag.draw();
+        ucDiag.interaction(true);
+        document.getElementById(div.id).style.cursor = "auto";
+      }
+    }
+
+    div.onclick = doubleClick;
+  }
+
+  ucDiag.draw();
+  ucDiag.interaction(true);
+  this.diagram = ucDiag;
+  console.log('done');
+}
+
+// read-only version for requirement view
+var AppClassDiagramRO = function(elementId) {
+
+  this.parent = document.getElementById(elementId); 
+  var submit = document.getElementById('submitbtn');
+  var xmlstr = document.getElementById('classDiagramXml').value;
+  var ucDiag = new UMLClassDiagram();
+  ucDiag._alone = true;
+
+  if(xmlstr) {
+    ucDiag.setXMLString(xmlstr);
+  }
+  
+  var c1 = document.getElementById('c11');
+  var c = c1.getContext('2d');
+  var c2 = document.getElementById('c22');
+  c2.onmousedown = function() { return false; };
+  var mc = c2.getContext('2d');
+  
+  var div = document.getElementById('ud2_diagram_div');
+
+  console.log(ucDiag.initialize(10, div, c, mc, 600, 1000));
+  ucDiag.setUpdateHeightCanvas(true);
+  ucDiag.draw();
+  ucDiag.interaction(false);
 }

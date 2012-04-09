@@ -5,67 +5,88 @@
     %meta(name="layout" content="main")
 
 
+  %r:require(module="showdown")
+  %r:require(module="ace")
   :javascript
     window.onload = function() {
       // init empty diagram here and add some functionalities
         var diag = new AppUseCaseRO("container"); 
+        var classDiag = new AppClassDiagramRO("container-class"); 
         var converter = new Showdown.converter();
       // init the diagram with xml structure here
+
+      var textarea = $("#textarea-description").hide();
+      var editor = ace.edit("description");
+      var MarkdownMode = require("ace/mode/markdown").Mode;
+      editor.setTheme("ace/theme/clouds_midnight");
+      editor.getSession().setMode(new MarkdownMode());
+      editor.getSession().setUseWrapMode(true);
+
+      $("#update").click(function() {
+        textarea.val(editor.getSession().getValue()); 
+      });
     }
-  #content 
 
-    ${flash.message}
-  
-    %h1
-      ${requirement.title} #${requirement.id}
 
-    %span(class="badge badge-warning")
-      ${requirement.useCases.size()}
-    use cases
-
-    .code
-      code: ${requirement.code}
-
-    .desc
-      description: ${requirement.description}
-
-    .status
-      status: ${requirement.status}
-
-    %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
-
-    %g:link(controller="requirement" action="generateFromXml" id="${params.id}")
-      generate structure from diagram
-
-    .useCases
-      %g:if(test="${requirement.useCases}")
-        %h2
-          Use Cases:
-        %ul
-          %g:each(in="${requirement.useCases}" var="${useCase}")
-            %li
-              .id
-                id: ${useCase.id}
-              .code
-                code: ${useCase.code}
-              .title
-                title: ${useCase.title}
-              .actor
-                actor: ${useCase.actors}
-              .maincontent
-                :javascript
-                  var text = converter.makeHtml(${useCase.mainContent});
-                  console.log(text)
-                maincontent: todo
-              .actions
-                %g:link(controller="useCase" action="edit" id="${useCase.id}")
-                  edit
-    %g:link(controller="requirement" action="edit" id="${params.id}")
-      edytuj
-    #container
-      #ud_container_div(style="border: 1px solid #000;")
-        #ud_diagram_div(style="position: relative;")
-          %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="1000")
-          %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="1000")
-        %br(style="clear: both;")
-
+  .container-fluid
+    %h1 
+      Requirement: ${requirement.title} 
+      %small (${requirement.code})
+    .row-fluid
+      %span(class="badge badge-warning")
+        ${requirement.useCases.size()}
+      %strong use cases
+      %span.label ${requirement.status}
+      %g:link(controller="requirement" action="generateFromXml" id="${params.id}" class="btn")
+        generate structure from diagram
+      %g:form(action="update")
+        %h3 Requirement description:
+        %div
+          %g:actionSubmit(id="update" action="update" class="btn btn-primary" value="Update")
+            
+          /%g:actionSubmit(id="edit" action="edit" class="btn btn-warning" value="Edit full requirement")
+          %g:link(elementId="edit" id="${requirement.id}" action="edit" controller="requirement" class="btn btn-warning")
+            Edit full requirement
+        %g:hiddenField(name="id" value="${requirement.id}")
+        %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
+        %g:hiddenField(id='classDiagramXml' name="classDiagramXml" value="${requirement.classDiagramXml}")
+        %g:textArea(name="description" id="textarea-description" value="${requirement.description}")
+      #desc-wrapper.span5
+        #description ${requirement.description}
+      .span6.well
+        .row
+          .span6
+            %h3 Use case diagram:
+            #container
+              #ud_container_div(style="border: 1px solid #000;")
+                #ud_diagram_div(style="position: relative;")
+                  %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="500")
+                  %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="500")
+                %br(style="clear: both;")
+          .span6
+            %h3 Class diagram:
+            #container-class
+              #ud2_container_div(style="border: 1px solid #000;")
+                #ud2_diagram_div(style="position: relative;")
+                  %canvas(id="c11" class="ud2_diagram_canvas" style="position: absolute;" width="500")
+                  %canvas(id="c22" class="ud2_diagram_canvas" style="position: absolute;" width="500")
+                %br(style="clear: both;")
+    .row-fluid
+      .span5.offset3.useCases
+        %g:if(test="${requirement.useCases}")
+          %h2 Use Cases:
+          %ul.unstyled
+            %g:each(in="${requirement.useCases}" var="${useCase}")
+              %li.well
+                .title
+                  %h4
+                    ${useCase.title}
+                    %small ${useCase.code}
+                .maincontent
+                  :javascript
+                    var text = converter.makeHtml(${useCase.mainContent});
+                    console.log(text)
+                  ${useCase.mainContent} 
+                .actions
+                  %g:link(class="btn" controller="useCase" action="show" id="${useCase.id}") show
+                  %g:link(class="btn" controller="useCase" action="edit" id="${useCase.id}") edit

@@ -49,12 +49,26 @@ div.ud_diagram_div {
   border: 1px solid black;
 }
 
+div.ud2_diagram_div {
+  position: relative;
+  float: left;
+  background: #ffffff;
+  border: 1px solid black;
+}
+
 
 
 /*****************************************
  [UDCore] Canvas elements style
 *****************************************/
 canvas.ud_diagram_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+
+canvas.ud2_diagram_canvas {
   position: absolute;
   top: 0;
   left: 0;

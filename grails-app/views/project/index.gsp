@@ -5,24 +5,65 @@
     <title>Welcome to Grails</title>
     <meta content='main' name='layout' />
   </head>
-  <div id='content'>
-    
-    ${flash.message}
-    
-    <g:link action='create' controller='project'>
-      new project
-    </g:link>
-    <h1>Project list</h1>
-    <g:each in='${projects}' var='project'>
-      <ul>
-        <li>
-          <g:link action='show' controller='project' id='${project.id}'>
-            ${project.name}
-          </g:link>
-          <br />
-          ${project.description}
-        </li>
-      </ul>
-    </g:each>
+  <div class='container-fluid'>
+    <div class='row-fluid'>
+      <div class='span2 well'>
+        <ul class='nav nav-list'>
+          <li class='nav-header'>
+            Menu
+          </li>
+          <li>
+            <g:link action='create' controller='project'>new project</g:link>
+          </li>
+        </ul>
+      </div>
+      <div class='span9 well'>
+        
+        <h1>Project list</h1>
+        <ul class='thumbnails'>
+          <g:each in='${projects}' var='project'>
+            <li class='span3'>
+              <div class='thumbnail'>
+                <div class='caption'>
+                  <p>
+                    <h3>
+                      <g:link action='show' controller='project' id='${project.id}'>${project.name}</g:link>
+                      <span class='label label-info'>
+                        ${project.deadline.format("dd-MM yy")}
+                      </span>
+                    </h3>
+                  </p>
+                  <p>
+                    ${project.description}
+                  </p>
+                  <p>
+                    <span class='badge badge-inverse'>${project.requirements.size()}</span>
+                    <g:if test='${project.requirements.size() == 1}'>
+                      requirement
+                    </g:if>
+                    <g:else>
+                      requirements
+                    </g:else>
+                  </p>
+                  <p>
+                    <span class='badge badge-inverse'>${project.countUseCases()}</span>
+                    use cases
+                  </p>
+                  <p>
+                    <g:link action='show' class='btn' id='${project.id}'>
+                      Check details
+                    </g:link>
+                    or
+                    <g:link action='edit' id='${project.id}'>
+                      edit project
+                    </g:link>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </g:each>
+        </ul>
+      </div>
+    </div>
   </div>
 </html>

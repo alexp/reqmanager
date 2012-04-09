@@ -4,6 +4,7 @@ class Project {
 
     String name
     String description
+    String mainNote
     java.sql.Timestamp timestamp
     java.util.Date deadline
 
@@ -11,5 +12,16 @@ class Project {
 
     static constraints = {
       deadline(nullable: true)
+      mainNote(nullable: true)
+    }
+
+    def countUseCases() {
+      def number=0
+
+      requirements.each {
+        number += it.useCases.size()
+      }
+
+      return number
     }
 }

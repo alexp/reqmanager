@@ -54,18 +54,15 @@
       #text-areas
         .text
           main content:
-          #main-content-editor.editor
-            ${useCase.mainContent}
+          #main-content-editor.editor ${useCase.mainContent}
           %g:textArea(id="main" name="mainContent" value="${useCase.mainContent}" class="hideme")
         .text
           basicFlow:
-          #basic-flow-editor.editor
-            ${useCase.basicFlow}
+          #basic-flow-editor.editor ${useCase.basicFlow}
           %g:textArea(id="basic" name="basicFlow" value="${useCase.basicFlow}" class="hideme")
         .text
           alterFlow:
-          #alter-flow-editor.editor
-            ${useCase.alterFlow}
+          #alter-flow-editor.editor ${useCase.alterFlow}
           %g:textArea(id="alter" name="alterFlow" value="${useCase.alterFlow}" class="hideme")
       .xml
         xml:

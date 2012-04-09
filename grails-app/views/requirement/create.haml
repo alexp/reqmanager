@@ -5,20 +5,97 @@
     %meta(name="layout" content="main")
 
 
-  #content 
-    
-    ${flash.message}
+  %r:require(module="ace")
+  :javascript
+    window.onload = function() {
+      var app = new AppUseCase("ud_diagram_div");
+      var appCD = new AppClassDiagram("ud2_diagram_div");
+      var textarea = $("textarea[name='description']").hide();
+      var editor = ace.edit("description");
+      var MarkdownMode = require("ace/mode/markdown").Mode;
+      editor.setTheme("ace/theme/clouds_midnight");
+      editor.getSession().setMode(new MarkdownMode());
+      editor.getSession().setUseWrapMode(true);
 
-    %g:form(action="save" method="post")
-      %g:hiddenField(name="project.id" value="${params.project_id}")
-      .code
-        code:
-        %g:textField(name="code" value="")
+      $("#submitbtn").click(function() {
+        textarea.val(editor.getSession().getValue()); 
 
-      .desc
-        description:
-        %g:textField(name="description" value="")      
+        $("#diagramXml").val(app.diagram.getXMLString());
+        $("#classDiagramXml").val(appCD.diagram.getXMLString());
+      });
+    }
 
-      %g:select(id="statusesSelect" name="status.id" from="${statuses}" value="" optionKey="id")
-      %g:actionSubmit(id="save" action="save" value="Save")
+  .container-fluid
+    .row-fluid
+      .span5
+        %h1 Adding new requirement
+        %g:form(action="save" method="post" class="form-horizontal")
+          %g:hiddenField(name="id" value="${requirement.id}")
+          %g:hiddenField(name="project.id" value="${params.project_id}")
+          %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
+          %g:hiddenField(id='classDiagramXml' name="classDiagramXml" value="${requirement.classDiagramXml}")
+          %fieldset.well
+            .control-group
+              %label.control-label(for="code")
+                Requirement code:
+              .controls
+                %g:textField(elementId="code" name="code" value="${requirement.code}" class="input-xlarge")
+                %p.help-block Docelowo, to będzie nadawane automatycznie
+            .control-group
+              %label.control-label(for="title")
+                Title:
+              .controls
+                %g:textField(elementId="title" name="title" value="${requirement.title}" class="input-xlarge")
+            .control-group
+              %label.control-label(for="select")
+                Requirement status:
+              .controls
+                %g:select(optionKey="id" elementId="select" name="status.id" from="${statuses}" value="${requirement.status}" class="input-xlarge")
+            .control-group
+              %label
+                Description:
+              #desc-wrapper
+                #description ${requirement.description}
+              .controls
+                %g:textArea(elementId="desc" name="description" value="${requirement.description}" class="input-xlarge span5")
+            .form-actions
+              %g:actionSubmit(value="Save changes" action="save" id="submitbtn" class="btn btn-primary")
+              or
+              %g:link(controller="project" action="show" id="${params.project_id}") cancel
+      .span7
+        .row
+          .span7
+            #menu
+              .btn-group
+                %button(id="addActor" class="btn")
+                  add actor 
+                %button(id="addElement" class="btn")
+                  add element
+                %button(id="addInclude" class="btn")
+                  add include 
+                %button(id="addExtend" class="btn")
+                  add extend 
+                %button(id="addSystem" class="btn")
+                  add system boundries
+                %button(id="addCommunication" class="btn")
+                  add communication
 
+                %button(id="deleteElement" class="btn")
+                  X 
+            #ud_container_div(style="border: 1px solid #000; margin-top: 10px")
+              #ud_diagram_div(style="position: relative;")
+                %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="500")
+                %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="500")
+              %br(style="clear: both;")
+        .row
+          .span7
+            #menu
+              .btn-group
+                %button(id="addClass" class="btn") add class 
+                %button(id="addAssoc" class="btn") add assoc 
+                %button(id="CDdeleteElement" class="btn") X 
+            #ud2_container_div(style="border: 1px solid #000; margin-top: 10px")
+              #ud2_diagram_div(style="position: relative;")
+                %canvas(id="c11" class="ud2_diagram_canvas" style="position: absolute;" width="500")
+                %canvas(id="c22" class="ud2_diagram_canvas" style="position: absolute;" width="500")
+              %br(style="clear: both;")

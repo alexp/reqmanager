@@ -4,25 +4,57 @@
     %title Project details
     %meta(name="layout" content="main")
 
-  #content 
-    %g:link(controller="project" action="create")
-      new project
+  %r:require(module="ace")
+  :javascript
+    window.onload = function() {
+      var textarea = $("textarea[id='main-note']").hide();
+      var editor = ace.edit("note"); 
+      var MarkdownMode = require("ace/mode/markdown").Mode;
+      editor.setTheme("ace/theme/clouds_midnight");
+      editor.getSession().setMode(new MarkdownMode());
+      editor.getSession().setUseWrapMode(true);
 
-    %h1
-      Projekt: ${project.name}
-    %p
-      Opis: ${project.description}
-
-    %p
-      Wymagania:
-      %g:each(in="${project.requirements}" var="requirement")
-        %ul.req
-          %li
-            ${requirement.code} | ${requirement.description} | ${requirement.status} | 
-            %g:link(controller="requirement" action="edit" id="${requirement.id}")
-              edytuj
-            %g:link(controller="requirement" action="show" id="${requirement.id}")
-              pokaz 
-    %p
-      %g:link(controller="requirement" action="create" params="[project_id : project.id]")
-        new requirement for this project
+      $("#update").click(function() {
+        textarea.val(editor.getSession().getValue()); 
+      });
+    };
+  .container-fluid
+    %h1 Project: ${project.name}
+    .row-fluid
+      %g:form(action="update" style="margin: 0;")
+        %h3 Main project note:
+        %div
+          %g:actionSubmit(id="update" action="update" class="btn btn-primary" value="Update")
+        %g:hiddenField(name="id" value="${project.id}")
+        %g:textArea(name="mainNote" id="main-note" value="${project.mainNote}")
+      #note-wrapper.span5
+        #note ${project.mainNote}
+      .span4.well
+        %h3 Project description
+        %p
+          ${project.description}
+        %p
+          %h3 Requirements:
+          %table.table.table-bordered
+            %thead
+              %tr
+                %th code
+                %th description
+                %th status
+                %th action  
+              %tbody
+                %g:each(in="${project.requirements}" var="requirement")
+                  %tr
+                    %td ${requirement.code}
+                    %td ${requirement.title}
+                    %td ${requirement.status}
+                    %td
+                      %g:link(controller="requirement" action="edit" id="${requirement.id}")
+                        edit 
+                      |
+                      %g:link(controller="requirement" action="show" id="${requirement.id}")
+                        show
+      .span2
+        %g:link(class="btn-large btn-warning" controller="requirement" action="create" params="[project_id : project.id]")
+          %i.icon.icon-file.icon-white 
+          add requirement

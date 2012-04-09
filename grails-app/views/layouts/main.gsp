@@ -10,6 +10,16 @@
     <r:layoutResources />
   </head>
   <body>
+    <div id="header">
+      <div class="wrapper">
+        <h1><g:link controller="project" action="index">Req</g:link></h1>
+      </div>
+    </div>
+    <g:if test="${flash.message}">
+      <div class="alert">
+        ${flash.message}
+      </div>
+    </g:if>
     <g:layoutBody/>
     <r:layoutResources />
   </body>

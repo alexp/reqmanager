@@ -4,7 +4,6 @@ class UseCase {
   
     String title
     String code
-    //Actor primaryActor
     String diagramXml
     String mainContent
     String basicFlow
@@ -12,8 +11,8 @@ class UseCase {
     String preConditions
     String postConditions
     
-    static hasMany = [actors : Actor]
-    static belongsTo = [requirement : Requirement]
+    static hasMany = [actors:Actor, requirements:Requirement]
+    static belongsTo = Requirement
 
     static mapping = {
       diagramXml type: SQLXMLType

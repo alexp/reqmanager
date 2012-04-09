@@ -61,23 +61,17 @@
       <div id='text-areas'>
         <div class='text'>
           main content:
-          <div class='editor' id='main-content-editor'>
-            ${useCase.mainContent}
-          </div>
+          <div class='editor' id='main-content-editor'>${useCase.mainContent}</div>
           <g:textArea class='hideme' id='main' name='mainContent' value='${useCase.mainContent}'></g:textArea>
         </div>
         <div class='text'>
           basicFlow:
-          <div class='editor' id='basic-flow-editor'>
-            ${useCase.basicFlow}
-          </div>
+          <div class='editor' id='basic-flow-editor'>${useCase.basicFlow}</div>
           <g:textArea class='hideme' id='basic' name='basicFlow' value='${useCase.basicFlow}'></g:textArea>
         </div>
         <div class='text'>
           alterFlow:
-          <div class='editor' id='alter-flow-editor'>
-            ${useCase.alterFlow}
-          </div>
+          <div class='editor' id='alter-flow-editor'>${useCase.alterFlow}</div>
           <g:textArea class='hideme' id='alter' name='alterFlow' value='${useCase.alterFlow}'></g:textArea>
         </div>
       </div>

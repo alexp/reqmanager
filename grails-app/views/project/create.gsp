@@ -5,6 +5,7 @@
     <title>Welcome to Grails</title>
     <meta content='main' name='layout' />
   </head>
+  ${flash.message}
   <div id='content'>
     <h1>
       New project

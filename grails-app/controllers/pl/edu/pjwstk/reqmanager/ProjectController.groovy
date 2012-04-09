@@ -11,6 +11,7 @@ class ProjectController {
     }
 
     def create = {
+      println "tworzę nowy projekt"
       [project : new Project()]
     }
 
@@ -18,11 +19,16 @@ class ProjectController {
       def project = new Project(params)
       project.timestamp = new java.sql.Timestamp(new java.util.Date().getTime())
 
-      if(!project.save(flush:true)) {
+      println "hjest jest"
+
+      if(project.hasErrors() || !project.save(flush:true)) {
+        println "model jest z pizdy"
         flash.message = "nieudany zapis: " + project.errors
-        render(view: "create", model: [project : project])
+        redirect(action: "create")
         return
       }
+
+      println "model jest w porządku"
 
       flash.message = "Successfully saved a project"
       redirect(action: "show", id: project.id)
@@ -30,5 +36,30 @@ class ProjectController {
 
     def show = {
       [project : Project.get(params.id)]
+    }
+
+    def edit = {
+      [project : Project.get(params.id)]
+    }
+
+    def update = {
+      def project = Project.get(params.id)
+
+      if(!project) {
+        flash.message = "Project ${params.id} not found"
+        redirect(action:"index")
+        return
+      }
+
+      project.properties = params
+
+      if(project.hasErrors() || !project.save(flush:true)) {
+        flash.message = "Project ${params.id} could not be saved"
+        redirect(action:"edit", id:params.id)
+        return
+      }
+
+      redirect(action:"show", id:params.id)
+      return
     }
 }

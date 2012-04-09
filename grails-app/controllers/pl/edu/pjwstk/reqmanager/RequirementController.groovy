@@ -49,7 +49,7 @@ class RequirementController {
 
       if(!requirement.hasErrors() && requirement.save()) {
         flash.message = "Requirement ${params.id} successfully updated"
-        render(view:"edit", model:[requirement:requirement, statuses:statuses])
+        redirect(action:"show", id:requirement.id)
         return
       } else {
         flash.message = "Requirement ${params.id} not updated"
@@ -58,7 +58,7 @@ class RequirementController {
       }
     } else {
       flash.message = "Requirement with id ${params.id} not found"
-      redirect(action:"edit", id:params.id)
+      redirect(action:"index") //TODO: requirement index
     }
   }
 

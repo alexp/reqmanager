@@ -1,8 +1,33 @@
 /* Aleksander Pszczółkowski 2012 */
+body {
+  background-image: url(../img/bg.png);
+}
+
+#header {
+  background-color: #101010;
+  height: 60px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#header .wrapper {
+  padding: 20px;
+  color: #3DE340;
+}
+
 .editor {
   position: relative;
   width: 500px;
-  height: 400px;
+  height: 700px;
+}
+
+#note, #description {
+  position: relative;
+  height: 700px;
+}
+
+#note-wrapper, #desc-wrapper {
+  position: relative;
 }
 
 #text-areas {
@@ -11,4 +36,9 @@
 
 .text {
   height: 500px;
+}
+
+.tiny {
+  color: #a0a0a0;
+  font-size: 10px;
 }
