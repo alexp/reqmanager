@@ -21,9 +21,6 @@
         $("#submitbtn").click(function() {
           textarea.val(editor.getSession().getValue()); 
       
-          alert(app.diagram.getXMLString());
-          alert(appCD.diagram.getXMLString());
-      
           $("#diagramXml").val(app.diagram.getXMLString());
           $("#classDiagramXml").val(appCD.diagram.getXMLString());
         });
