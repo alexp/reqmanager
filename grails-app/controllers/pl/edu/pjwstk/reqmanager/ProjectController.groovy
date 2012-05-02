@@ -19,10 +19,8 @@ class ProjectController {
       def project = new Project(params)
       project.timestamp = new java.sql.Timestamp(new java.util.Date().getTime())
 
-      println "hjest jest"
-
       if(project.hasErrors() || !project.save(flush:true)) {
-        println "model jest z pizdy"
+        println "model jest 'zepsuty'"
         flash.message = "nieudany zapis: " + project.errors
         redirect(action: "create")
         return

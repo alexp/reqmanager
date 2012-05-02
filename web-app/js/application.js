@@ -235,7 +235,7 @@ var AppUseCase = function(elementId) {
   console.log('done');
 }
 
-var AppClassDiagram = function(elementId) {
+/*var AppClassDiagram = function(elementId) {
   var submit = document.getElementById('submitbtn');
   var xmlstr = document.getElementById('classDiagramXml').value;
 
@@ -366,3 +366,4 @@ var AppClassDiagramRO = function(elementId) {
   ucDiag.draw();
   ucDiag.interaction(false);
 }
+*/

@@ -10,7 +10,6 @@
     //<![CDATA[
       window.onload = function() {
         var app = new AppUseCase("ud_diagram_div");
-        var appCD = new AppClassDiagram("ud2_diagram_div");
         var textarea = $("textarea[name='description']").hide();
         var editor = ace.edit("description");
         var MarkdownMode = require("ace/mode/markdown").Mode;
@@ -21,7 +20,6 @@
         $("#submitbtn").click(function() {
           textarea.val(editor.getSession().getValue()); 
           $("#diagramXml").val(app.diagram.getXMLString());
-          $("#classDiagramXml").val(appCD.diagram.getXMLString());
         });
       }
     //]]>
@@ -34,8 +32,7 @@
         </h1>
         <form class='form-horizontal' method='post' name='update requirement'>
           <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
-          <g:hiddenField id='diagramXml' name='diagramXml' value='${requirement.diagramXml}'></g:hiddenField>
-          <g:hiddenField id='classDiagramXml' name='classDiagramXml' value='${requirement.classDiagramXml}'></g:hiddenField>
+          <g:hiddenField id='diagramXml' name='diagram.xmlString' value='${requirement.diagram?.xmlString}'></g:hiddenField>
           <fieldset class='well'>
             <div class='control-group'>
               <label class='control-label' for='code'>
@@ -113,24 +110,6 @@
               <div id='ud_diagram_div' style='position: relative;'>
                 <canvas class='ud_diagram_canvas' id='c1' style='position: absolute;' width='500'></canvas>
                 <canvas class='ud_diagram_canvas' id='c2' style='position: absolute;' width='500'></canvas>
-              </div>
-              <br style='clear: both;' />
-            </div>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='span7'>
-            <div id='menu'>
-              <div class='btn-group'>
-                <button class='btn' id='addClass'>add class</button>
-                <button class='btn' id='addAssoc'>add assoc</button>
-                <button class='btn' id='CDdeleteElement'>X</button>
-              </div>
-            </div>
-            <div id='ud2_container_div' style='border: 1px solid #000; margin-top: 10px'>
-              <div id='ud2_diagram_div' style='position: relative;'>
-                <canvas class='ud2_diagram_canvas' id='c11' style='position: absolute;' width='500'></canvas>
-                <canvas class='ud2_diagram_canvas' id='c22' style='position: absolute;' width='500'></canvas>
               </div>
               <br style='clear: both;' />
             </div>

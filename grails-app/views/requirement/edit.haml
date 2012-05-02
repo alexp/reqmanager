@@ -8,7 +8,6 @@
   :javascript
     window.onload = function() {
       var app = new AppUseCase("ud_diagram_div");
-      var appCD = new AppClassDiagram("ud2_diagram_div");
       var textarea = $("textarea[name='description']").hide();
       var editor = ace.edit("description");
       var MarkdownMode = require("ace/mode/markdown").Mode;
@@ -19,7 +18,6 @@
       $("#submitbtn").click(function() {
         textarea.val(editor.getSession().getValue()); 
         $("#diagramXml").val(app.diagram.getXMLString());
-        $("#classDiagramXml").val(appCD.diagram.getXMLString());
       });
     }
 
@@ -31,8 +29,7 @@
         
         %form(name="update requirement" method="post" class="form-horizontal")
           %g:hiddenField(name="id" value="${requirement.id}")
-          %g:hiddenField(id='diagramXml' name="diagramXml" value="${requirement.diagramXml}")
-          %g:hiddenField(id='classDiagramXml' name="classDiagramXml" value="${requirement.classDiagramXml}")
+          %g:hiddenField(id='diagramXml' name="diagram.xmlString" value="${requirement.diagram?.xmlString}")
           %fieldset.well
             .control-group
               %label.control-label(for="code")
@@ -85,16 +82,4 @@
               #ud_diagram_div(style="position: relative;")
                 %canvas(id="c1" class="ud_diagram_canvas" style="position: absolute;" width="500")
                 %canvas(id="c2" class="ud_diagram_canvas" style="position: absolute;" width="500")
-              %br(style="clear: both;")
-        .row
-          .span7
-            #menu
-              .btn-group
-                %button(id="addClass" class="btn") add class 
-                %button(id="addAssoc" class="btn") add assoc 
-                %button(id="CDdeleteElement" class="btn") X 
-            #ud2_container_div(style="border: 1px solid #000; margin-top: 10px")
-              #ud2_diagram_div(style="position: relative;")
-                %canvas(id="c11" class="ud2_diagram_canvas" style="position: absolute;" width="500")
-                %canvas(id="c22" class="ud2_diagram_canvas" style="position: absolute;" width="500")
               %br(style="clear: both;")

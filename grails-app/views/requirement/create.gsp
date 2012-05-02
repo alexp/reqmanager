@@ -34,8 +34,7 @@
         <g:form action='save' class='form-horizontal' method='post'>
           <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
           <g:hiddenField name='project.id' value='${params.project_id}'></g:hiddenField>
-          <g:hiddenField id='diagramXml' name='diagramXml' value='${requirement.diagramXml}'></g:hiddenField>
-          <g:hiddenField id='classDiagramXml' name='classDiagramXml' value='${requirement.classDiagramXml}'></g:hiddenField>
+          <g:hiddenField id='diagramXml' name='diagram.xmlString' value='${requirement.diagram?.xmlString}'></g:hiddenField>
           <fieldset class='well'>
             <div class='control-group'>
               <label class='control-label' for='code'>
@@ -60,6 +59,14 @@
               </label>
               <div class='controls'>
                 <g:select class='input-xlarge' elementId='select' from='${statuses}' name='status.id' optionKey='id' value='${requirement.status}'></g:select>
+              </div>
+            </div>
+            <div class='control-group'>
+              <label class='control-label' for='select'>
+                Diagram:
+              </label>
+              <div class='controls'>
+                <g:select class='input-xlarge' elementId='sel' from='${diagrams}' name='diagram.id' optionKey='id' value='${requirement.diagram}'></g:select>
               </div>
             </div>
             <div class='control-group'>
@@ -113,24 +120,6 @@
               <div id='ud_diagram_div' style='position: relative;'>
                 <canvas class='ud_diagram_canvas' id='c1' style='position: absolute;' width='500'></canvas>
                 <canvas class='ud_diagram_canvas' id='c2' style='position: absolute;' width='500'></canvas>
-              </div>
-              <br style='clear: both;' />
-            </div>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='span7'>
-            <div id='menu'>
-              <div class='btn-group'>
-                <button class='btn' id='addClass'>add class</button>
-                <button class='btn' id='addAssoc'>add assoc</button>
-                <button class='btn' id='CDdeleteElement'>X</button>
-              </div>
-            </div>
-            <div id='ud2_container_div' style='border: 1px solid #000; margin-top: 10px'>
-              <div id='ud2_diagram_div' style='position: relative;'>
-                <canvas class='ud2_diagram_canvas' id='c11' style='position: absolute;' width='500'></canvas>
-                <canvas class='ud2_diagram_canvas' id='c22' style='position: absolute;' width='500'></canvas>
               </div>
               <br style='clear: both;' />
             </div>

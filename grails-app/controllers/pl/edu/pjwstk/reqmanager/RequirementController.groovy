@@ -3,15 +3,21 @@ package pl.edu.pjwstk.reqmanager
 class RequirementController {
   
   def create = {
-    [requirement : new Requirement(), statuses:Status.list()]
+    [requirement : new Requirement(), statuses:Status.list(), diagrams:Diagram.list()]
   }
 
   def save = {
 
     println "save initiated"
     println params
-
+    
     def requirement = new Requirement(params)
+
+    if(requirement.diagram == null) {
+      def diagram = new Diagram(xmlString: params.diagram.xmlString) 
+      requirement.diagram = diagram
+      diagram.save()
+    }
 
     println "requ: ${requirement} ; pro: ${requirement.project}"
 
@@ -44,7 +50,7 @@ class RequirementController {
     println params
 
     if(requirement) {
-      params.diagramXml = params.diagramXml.trim()
+      params.diagram.xmlString = params.diagram.xmlString.trim()
       requirement.properties = params
 
       if(!requirement.hasErrors() && requirement.save()) {
@@ -70,6 +76,8 @@ class RequirementController {
     def requirement = Requirement.get(params.id)
 
     requirement.generateFromXml()
+    println "bleble"
+    println requirement.useCases
     if(requirement.save(flush:true)) {
       flash.message = "saved objects from xml"
     } else {

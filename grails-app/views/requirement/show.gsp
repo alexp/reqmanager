@@ -12,7 +12,6 @@
       window.onload = function() {
         // init empty diagram here and add some functionalities
           var diag = new AppUseCaseRO("container"); 
-          var classDiag = new AppClassDiagramRO("container-class"); 
           var converter = new Showdown.converter();
         // init the diagram with xml structure here
       
@@ -53,8 +52,7 @@
           </g:link>
         </div>
         <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
-        <g:hiddenField id='diagramXml' name='diagramXml' value='${requirement.diagramXml}'></g:hiddenField>
-        <g:hiddenField id='classDiagramXml' name='classDiagramXml' value='${requirement.classDiagramXml}'></g:hiddenField>
+        <g:hiddenField id='diagramXml' name='diagram.xmlString' value='${requirement.diagram?.xmlString}'></g:hiddenField>
         <g:textArea id='textarea-description' name='description' value='${requirement.description}'></g:textArea>
       </g:form>
       <div class='span5' id='desc-wrapper'>
@@ -74,18 +72,7 @@
               </div>
             </div>
           </div>
-          <div class='span6'>
-            <h3>Class diagram:</h3>
-            <div id='container-class'>
-              <div id='ud2_container_div' style='border: 1px solid #000;'>
-                <div id='ud2_diagram_div' style='position: relative;'>
-                  <canvas class='ud2_diagram_canvas' id='c11' style='position: absolute;' width='500'></canvas>
-                  <canvas class='ud2_diagram_canvas' id='c22' style='position: absolute;' width='500'></canvas>
-                </div>
-                <br style='clear: both;' />
-              </div>
-            </div>
-          </div>
+          <div class='span6'></div>
         </div>
       </div>
     </div>

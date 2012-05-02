@@ -7,43 +7,31 @@ class Requirement {
     String title 
     String description 
     String code
-    String diagramXml
-    String classDiagramXml
-        
+    
+    Diagram diagram
     static hasMany = [useCases : UseCase]
 
-    static mapping = {
-      diagramXml type: SQLXMLType
-      classDiagramXml type: SQLXMLType
-    }
-
     static constraints = {
-      diagramXml(nullable: true)
-      classDiagramXml(nullable: true)
       title(nullable: true)
-    }
-
-    String toString() {
-      println code + " " + 
-        status + " " + 
-        description 
+      diagram(nullable: true)
     }
 
     def generateFromXml() {
-      def xml = new XmlSlurper().parseText(this.diagramXml)
+      def xml = new XmlSlurper().parseText(this.diagram.xmlString)
 
-      def actors = xml.UMLSystem.UMLActor.item.each { xmlItem ->
-        def actor = Actor.findByName(xmlItem.@value.text())
-      }
-
-      def useCases = xml.UMLSystem.UMLUseCase.item.each { xmlItem -> 
+      xml.UMLSystem.UMLUseCase.item.each { xmlItem -> 
         def useCase = UseCase.findByTitle(xmlItem.@value.text())
         if(useCase != null) {
           println useCase
-          if(!this.useCases.contains(useCase)) {
+          if(!((this.useCases.collect{it.id}).contains(useCase.id))) {
+            println this.useCases
+            println "doesnt contain"
+            println useCase
             this.addToUseCases(UseCase.get(useCase.id))
+            println "added ${useCase.id}"
           }
         } else {
+          println "GOOOOD MORNING VIETNAM"
           this.addToUseCases(new UseCase(title: xmlItem.@value.text(), code: "newUC")) 
         }
       }
