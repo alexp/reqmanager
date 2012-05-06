@@ -17,10 +17,76 @@
         editor.getSession().setMode(new MarkdownMode());
         editor.getSession().setUseWrapMode(true);
       
+        var reqId = $("#id").val();
+        var reqUseCases = $.ajax({
+          type: "GET",
+          url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+          cache: false
+        }).done(function(xht){ 
+          var dom = (new DOMParser()).parseFromString(app.diagram.getXMLString(), "text/xml");
+          var documentEle = dom.documentElement;
+          var usecaseArray = documentEle.getElementsByTagName('UMLUseCase');
+          console.log("usecaseArray: " + usecaseArray);
+      
+          console.log(app.diagram);
+          for(var i = 0; i < usecaseArray.length; i++) {
+      
+            console.log(usecaseArray[i].childNodes);
+      
+            for(var j = 0; j < usecaseArray[i].childNodes.length; j++) {
+      
+              console.log(usecaseArray[i].childNodes[j]);
+              var itemValue = usecaseArray[i].childNodes[j].attributes.value;
+      
+              if(itemValue != undefined) {
+      
+                console.log("ITEM VALUE: " + itemValue.value);
+                console.log("XHT: " + xht);
+      
+                if(itemValue.value.toString() === xht.toString()) {
+      
+                  console.log("THISISIT!!!!! : ");
+                  console.log(usecaseArray[i]);
+      
+                  var divv = document.getElementById("ud_diagram_div");
+                  var foundUseCase = null;
+      
+                  for(var k = 0; k < app.diagram._nodes.length; k++) {
+                    if(app.diagram._nodes[k].getName().toString() === xht.toString()) {
+                      foundUseCase = app.diagram._nodes[k]; 
+                    }
+                  };
+      
+                  console.log(foundUseCase);
+      
+                  if(foundUseCase) foundUseCase.setBackgroundColor("#F3F5BC");
+                  app.diagram.draw();
+                }
+              }
+            }
+      
+          }
+      
+        });
+      
+        var div = document.getElementById("ud_diagram_div");
+        /*$("#ud_diagram_div").click(function() {
+          var mouseX = event.pageX - div.offsetLeft;
+          var mouseY = event.pageY - div.offsetTop;
+          console.log("mouseX :" + mouseX + " mouseY:" + mouseY); 
+          console.log(app.diagram.getElementByPoint(mouseX, mouseY));
+          var ele = app.diagram.getElementByPoint(mouseX, mouseY);
+          console.log(ele.getName());
+          ele.setBackgroundColor("#F3F5BC");
+          app.diagram.draw();
+        });*/
+      
         $("#submitbtn").click(function() {
           textarea.val(editor.getSession().getValue()); 
           $("#diagramXml").val(app.diagram.getXMLString());
         });
+      
+        console.log("reqUseCases: " + reqUseCases);
       }
     //]]>
   </script>
@@ -100,6 +166,9 @@
                 </button>
                 <button class='btn' id='addCommunication'>
                   add communication
+                </button>
+                <button class='btn' id='markForRequirement'>
+                  mark for requirement
                 </button>
                 <button class='btn' id='deleteElement'>
                   X

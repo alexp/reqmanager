@@ -9,8 +9,11 @@
   <script type='text/javascript'>
     //<![CDATA[
       window.onload = function() {
-        var app = new AppUseCase("ud_diagram_div");
-        var appCD = new AppClassDiagram("ud2_diagram_div");
+      
+        $("#diagram-toggle-handle").click(function() {
+          newDiagram();
+        });
+      
         var textarea = $("textarea[name='description']").hide();
         var editor = ace.edit("description");
         var MarkdownMode = require("ace/mode/markdown").Mode;
@@ -21,8 +24,9 @@
         $("#submitbtn").click(function() {
           textarea.val(editor.getSession().getValue()); 
       
-          $("#diagramXml").val(app.diagram.getXMLString());
-          $("#classDiagramXml").val(appCD.diagram.getXMLString());
+          if($("#diagramXml")) {
+            $("#diagramXml").val(app.diagram.getXMLString());
+          }
         });
       }
     //]]>
@@ -32,9 +36,10 @@
       <div class='span5'>
         <h1>Adding new requirement</h1>
         <g:form action='save' class='form-horizontal' method='post'>
-          <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
-          <g:hiddenField name='project.id' value='${params.project_id}'></g:hiddenField>
-          <g:hiddenField id='diagramXml' name='diagram.xmlString' value='${requirement.diagram?.xmlString}'></g:hiddenField>
+          <div id='hidden-fields'>
+            <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
+            <g:hiddenField name='project.id' value='${params.project_id}'></g:hiddenField>
+          </div>
           <fieldset class='well'>
             <div class='control-group'>
               <label class='control-label' for='code'>
@@ -61,7 +66,7 @@
                 <g:select class='input-xlarge' elementId='select' from='${statuses}' name='status.id' optionKey='id' value='${requirement.status}'></g:select>
               </div>
             </div>
-            <div class='control-group'>
+            <div class='control-group existing-diagram'>
               <label class='control-label' for='select'>
                 Diagram:
               </label>
@@ -90,6 +95,13 @@
       </div>
       <div class='span7'>
         <div class='row'>
+          <div class='span7 diagram-toggle'>
+            <a href='#' id='diagram-toggle-handle'>
+              new diagram
+            </a>
+          </div>
+        </div>
+        <div class='row new-diagram' style='display: none;'>
           <div class='span7'>
             <div id='menu'>
               <div class='btn-group'>

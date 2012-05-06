@@ -1,4 +1,5 @@
 package pl.edu.pjwstk.reqmanager
+import grails.converters.*
 
 class RequirementController {
   
@@ -12,14 +13,6 @@ class RequirementController {
     println params
     
     def requirement = new Requirement(params)
-
-    if(requirement.diagram == null) {
-      def diagram = new Diagram(xmlString: params.diagram.xmlString) 
-      requirement.diagram = diagram
-      diagram.save()
-    }
-
-    println "requ: ${requirement} ; pro: ${requirement.project}"
 
     if(!requirement.save(flush: true)) {
       flash.message = "nieudany zapis wymagania"
@@ -87,5 +80,22 @@ class RequirementController {
 
     redirect(controller:"requirement", action:"show", id:params.id)
   }
-}
 
+  def addUseCase = {
+    println params
+    def requirement = Requirement.get(params.id)
+    def useCase = UseCase.findByTitle(params.clickedUCName)
+    if(useCase == null) {
+      useCase = new UseCase(title: params.clickedUCName, code: params.clickedUCId)
+      requirement.addToUseCases(useCase)
+      if(requirement.save(flush:true)) {
+        render(text: "ok")
+      }
+    }
+  }
+
+  def getUseCases = {
+    def requirement = Requirement.get(params.id as Long)
+    render requirement.useCases.collect{ it.title } as JSON
+  }
+}
