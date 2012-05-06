@@ -42,8 +42,11 @@
       
                 console.log("ITEM VALUE: " + itemValue.value);
                 console.log("XHT: " + xht);
+                console.log("xht array: " + xht[0]);
       
-                if(itemValue.value.toString() === xht.toString()) {
+                console.log("INDEX OF: " + xht.indexOf(itemValue.value.toString()));
+      
+                if(xht.indexOf(itemValue.value.toString()) != -1) {
       
                   console.log("THISISIT!!!!! : ");
                   console.log(usecaseArray[i]);
@@ -52,7 +55,7 @@
                   var foundUseCase = null;
       
                   for(var k = 0; k < app.diagram._nodes.length; k++) {
-                    if(app.diagram._nodes[k].getName().toString() === xht.toString()) {
+                    if(app.diagram._nodes[k].getName().toString() === xht[xht.indexOf(itemValue.value.toString())]) {
                       foundUseCase = app.diagram._nodes[k]; 
                     }
                   };

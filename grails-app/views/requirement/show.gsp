@@ -11,8 +11,8 @@
     //<![CDATA[
       window.onload = function() {
         // init empty diagram here and add some functionalities
-          var diag = new AppUseCaseRO("container"); 
-          var converter = new Showdown.converter();
+        var diag = new AppUseCaseRO("container"); 
+        var converter = new Showdown.converter();
         // init the diagram with xml structure here
       
         var textarea = $("#textarea-description").hide();
@@ -24,6 +24,60 @@
       
         $("#update").click(function() {
           textarea.val(editor.getSession().getValue()); 
+        });
+      
+        var reqId = $("#id").val();
+        var reqUseCases = $.ajax({
+          type: "GET",
+          url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+          cache: false
+        }).done(function(xht){ 
+          var dom = (new DOMParser()).parseFromString(diag.diagram.getXMLString(), "text/xml");
+          var documentEle = dom.documentElement;
+          var usecaseArray = documentEle.getElementsByTagName('UMLUseCase');
+          console.log("usecaseArray: " + usecaseArray);
+      
+          console.log(diag.diagram);
+          for(var i = 0; i < usecaseArray.length; i++) {
+      
+            console.log(usecaseArray[i].childNodes);
+      
+            for(var j = 0; j < usecaseArray[i].childNodes.length; j++) {
+      
+              console.log(usecaseArray[i].childNodes[j]);
+              var itemValue = usecaseArray[i].childNodes[j].attributes.value;
+      
+              if(itemValue != undefined) {
+      
+                console.log("ITEM VALUE: " + itemValue.value);
+                console.log("XHT: " + xht);
+                console.log("xht array: " + xht[0]);
+      
+                console.log("INDEX OF: " + xht.indexOf(itemValue.value.toString()));
+      
+                if(xht.indexOf(itemValue.value.toString()) != -1) {
+      
+                  console.log("THISISIT!!!!! : ");
+                  console.log(usecaseArray[i]);
+      
+                  var divv = document.getElementById("ud_diagram_div");
+                  var foundUseCase = null;
+      
+                  for(var k = 0; k < diag.diagram._nodes.length; k++) {
+                    if(diag.diagram._nodes[k].getName().toString() === xht[xht.indexOf(itemValue.value.toString())]) {
+                      foundUseCase = diag.diagram._nodes[k]; 
+                    }
+                  };
+      
+                  console.log(foundUseCase);
+      
+                  if(foundUseCase) foundUseCase.setBackgroundColor("#F3F5BC");
+                  diag.diagram.draw();
+                }
+              }
+            }
+      
+          }
         });
       }
     //]]>
@@ -39,9 +93,6 @@
       </span>
       <strong>use cases</strong>
       <span class='label'>${requirement.status}</span>
-      <g:link action='generateFromXml' class='btn' controller='requirement' id='${params.id}'>
-        generate structure from diagram
-      </g:link>
       <g:form action='update'>
         <h3>Requirement description:</h3>
         <div>

@@ -27,6 +27,7 @@ var AppUseCaseRO = function(elementId) {
   ucDiag.setUpdateHeightCanvas(true);
   ucDiag.draw();
   ucDiag.interaction(false);
+  this.diagram = ucDiag;
 }
 
 var AppUseCase = function(elementId) {
@@ -40,7 +41,15 @@ var AppUseCase = function(elementId) {
     var hiddenField = document.getElementById('diagramXml');
     hiddenField.value = ucDiag.getXMLString();
     xmlstr = hiddenField.value;
-    
+
+    // ustaw wszystkie tla na biale
+    for(var k = 0; k < ucDiag._nodes.length; k++) {
+      console.log(ucDiag._nodes[k]);
+      console.log(ucDiag._nodes[k].getType());
+      if(ucDiag._nodes[k].getType() === "UMLUseCase") {
+        ucDiag._nodes[k].setBackgroundColor("#ffffff");
+      }
+    }
   }
 
   //var ucDiag = new UMLUseCaseDiagram({id: 'ud_diagram_div', width: '600', height: '300'});

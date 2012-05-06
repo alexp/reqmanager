@@ -85,11 +85,19 @@ class RequirementController {
     println params
     def requirement = Requirement.get(params.id)
     def useCase = UseCase.findByTitle(params.clickedUCName)
+    
     if(useCase == null) {
       useCase = new UseCase(title: params.clickedUCName, code: params.clickedUCId)
+      println "\t\t!!!!!!!!!!!!!!!!!!! useCase:" + useCase
+    } else {
       requirement.addToUseCases(useCase)
       if(requirement.save(flush:true)) {
         render(text: "ok")
+      }
+      if(!requirement.useCases.contains(useCase)) {
+        requirement.addToUseCases(useCase)
+      } else {
+        
       }
     }
   }
