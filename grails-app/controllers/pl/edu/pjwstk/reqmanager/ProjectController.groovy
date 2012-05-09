@@ -26,7 +26,7 @@ class ProjectController {
         return
       }
 
-      println "model jest w porządku"
+      println "model jest ok"
 
       flash.message = "Successfully saved a project"
       redirect(action: "show", id: project.id)
