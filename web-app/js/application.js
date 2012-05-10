@@ -251,16 +251,16 @@ var AppUseCase = function(elementId) {
       var clickedElement = ucDiag.getElementByPoint(mouseX, mouseY);
       console.log(clickedElement);
       if(clickedElement instanceof UseCase) {
-        var confirmation = confirm("are you suuuuuure?! :>");
+        var confirmation = confirm("Please confirm, marking this useCase as member of current requirement");
         console.log(confirmation);
         if(confirmation) {
           $.ajax({
             type: "POST",
-            url: "http://localhost:8080/reqmanager/requirement/addUseCase/" + reqId,
+            url: "http://reqmanager.herokuapp.com/requirement/addUseCase/" + reqId,
             cache: false,
             data: { xmlString: ucDiag.getXMLString(), clickedUCName: clickedElement.getName(), clickedUCId: clickedElement.getId() }
           }).done(function(msg) {
-            alert("dadasd");
+            alert("done!");
           });
         }
       }
