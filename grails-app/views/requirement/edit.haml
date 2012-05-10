@@ -1,4 +1,4 @@
-!!!
+
 %html
   %head
     %title Requirement details
@@ -18,7 +18,7 @@
       var reqId = $("#id").val();
       var reqUseCases = $.ajax({
         type: "GET",
-        url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+        url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
         cache: false
       }).done(function(xht){ 
         var dom = (new DOMParser()).parseFromString(app.diagram.getXMLString(), "text/xml");
