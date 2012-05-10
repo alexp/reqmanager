@@ -89,6 +89,8 @@ class RequirementController {
     if(useCase == null) {
       useCase = new UseCase(title: params.clickedUCName, code: params.clickedUCId)
       println "\t\t!!!!!!!!!!!!!!!!!!! useCase:" + useCase
+      requirement.addToUseCases(useCase)
+      render(text: "ok")
     } else {
       if(!requirement.useCases.contains(useCase)) {
         requirement.addToUseCases(useCase)
