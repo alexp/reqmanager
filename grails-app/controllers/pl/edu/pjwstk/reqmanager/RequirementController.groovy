@@ -91,13 +91,11 @@ class RequirementController {
       println "\t\t!!!!!!!!!!!!!!!!!!! useCase:" + useCase
     } else {
       requirement.addToUseCases(useCase)
-      if(requirement.save(flush:true)) {
-        render(text: "ok")
-      }
       if(!requirement.useCases.contains(useCase)) {
         requirement.addToUseCases(useCase)
+        render(text: "ok")
       } else {
-        
+        render(text): "ok")  
       }
     }
   }
