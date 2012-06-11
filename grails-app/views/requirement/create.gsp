@@ -123,6 +123,9 @@
                 <button class='btn' id='addCommunication'>
                   add communication
                 </button>
+                <button class='btn' id='markForRequirement'>
+                  mark for requirement
+                </button>
                 <button class='btn' id='deleteElement'>
                   X
                 </button>

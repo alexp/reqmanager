@@ -2,6 +2,8 @@ package pl.edu.pjwstk.reqmanager
 
 class ProjectController {
 
+    def dataSource
+    
     def list = {
       redirect(action:"index")        
     }
@@ -59,5 +61,11 @@ class ProjectController {
 
       redirect(action:"show", id:params.id)
       return
+    }
+
+    def generateSpec = {
+      def s = new SpecWorker()
+      s.ds = dataSource
+      s.generateSpec()
     }
 }

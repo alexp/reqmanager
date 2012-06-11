@@ -1,5 +1,4 @@
 <%-- DO NOT MODIFY THIS FILE, IT IS AUTOMATICALLY GENERATED. INSTEAD MODIFY edit.haml --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
     <title>Requirement details</title>
@@ -20,7 +19,7 @@
         var reqId = $("#id").val();
         var reqUseCases = $.ajax({
           type: "GET",
-          url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+          url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
           cache: false
         }).done(function(xht){ 
           var dom = (new DOMParser()).parseFromString(app.diagram.getXMLString(), "text/xml");
