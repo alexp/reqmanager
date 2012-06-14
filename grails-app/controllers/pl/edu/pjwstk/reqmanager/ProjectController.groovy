@@ -1,5 +1,11 @@
 package pl.edu.pjwstk.reqmanager
 
+import java.io.*;
+import com.lowagie.text.DocumentException;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+import javax.xml.parsers.*
+import org.w3c.dom.*
+
 class ProjectController {
 
     def dataSource
@@ -66,6 +72,14 @@ class ProjectController {
     def generateSpec = {
       def s = new SpecWorker()
       s.ds = dataSource
-      s.generateSpec()
+
+      Document doc = s.generateSpec(params.id)
+
+      ITextRenderer renderer = new ITextRenderer();
+      renderer.setDocument(doc, null);
+      renderer.layout();
+      OutputStream os = response.getOutputStream();
+      renderer.createPDF(os);
+      os.close();
     }
 }

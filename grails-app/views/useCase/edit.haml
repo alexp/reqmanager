@@ -64,8 +64,4 @@
           alterFlow:
           #alter-flow-editor.editor ${useCase.alterFlow}
           %g:textArea(id="alter" name="alterFlow" value="${useCase.alterFlow}" class="hideme")
-      .xml
-        xml:
-        /%g:textArea(id="xmlValue" name="diagramXml" value="${useCase.diagramXml}")
-        %g:hiddenField(id='diagramXml' name="diagramXml" value="${useCase.diagramXml}")
       %g:actionSubmit(value="Save" action="update" id="submitbtn")

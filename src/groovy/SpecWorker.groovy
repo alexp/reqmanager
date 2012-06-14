@@ -3,6 +3,8 @@ package pl.edu.pjwstk.reqmanager
 import java.io.*;
 import com.lowagie.text.DocumentException;
 import org.xhtmlrenderer.pdf.ITextRenderer;
+import javax.xml.parsers.*
+import org.w3c.dom.*
 
 class SpecWorker {
 
@@ -10,22 +12,14 @@ class SpecWorker {
 
   SpecWorker() {}
 
-  def generateSpec() {
+  def generateSpec(project_id) {
 
     def m = new MarkdownToHtml()
     m.ds = ds
-    m.printToFile()
-
-    String inputFile = "target/firstdoc.xhtml";
-    String url = new File(inputFile).toURI().toURL().toString();
-    String outputFile = "target/firstdoc.pdf";
-    OutputStream os = new FileOutputStream(outputFile);
-
-    ITextRenderer renderer = new ITextRenderer();
-    renderer.setDocument(url);
-    renderer.layout();
-    renderer.createPDF(os);
-
-    os.close();
+    String html = m.printToFile(project_id)
+    
+    DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    Document doc = builder.parse(new ByteArrayInputStream(html.getBytes("UTF-8")))
+    return doc
   }
 }

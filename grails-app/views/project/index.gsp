@@ -58,6 +58,11 @@
                       edit project
                     </g:link>
                   </p>
+                  <p>
+                    <g:link action='generateSpec' class='btn btn-primary' id='${project.id}'>
+                      Generate specification
+                    </g:link>
+                  </p>
                 </div>
               </div>
             </li>

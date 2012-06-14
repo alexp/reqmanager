@@ -75,11 +75,6 @@
           <g:textArea class='hideme' id='alter' name='alterFlow' value='${useCase.alterFlow}'></g:textArea>
         </div>
       </div>
-      <div class='xml'>
-        xml:
-        <!-- %g:textArea(id="xmlValue" name="diagramXml" value="${useCase.diagramXml}") -->
-        <g:hiddenField id='diagramXml' name='diagramXml' value='${useCase.diagramXml}'></g:hiddenField>
-      </div>
       <g:actionSubmit action='update' id='submitbtn' value='Save'></g:actionSubmit>
     </g:form>
   </div>
