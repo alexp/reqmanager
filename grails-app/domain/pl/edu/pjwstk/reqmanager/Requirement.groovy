@@ -16,6 +16,10 @@ class Requirement {
       diagram(nullable: true)
     }
 
+    static mapping = {
+      description type: 'text'
+    }
+
     def generateFromXml() {
       def xml = new XmlSlurper().parseText(this.diagram.xmlString)
 

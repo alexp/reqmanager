@@ -15,6 +15,11 @@ class Project {
       mainNote(nullable: true)
     }
 
+    static mapping = {
+      mainNote type: 'text'
+      description type: 'text'
+    }
+
     def countUseCases() {
       def number=0
 

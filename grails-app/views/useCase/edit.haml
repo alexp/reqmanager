@@ -41,6 +41,7 @@
       Edit Use Case #${useCase.id}
 
     %g:form(method="post")
+      %g:actionSubmit(value="Save" action="update" id="submitbtn")
       %g:hiddenField(name="id" value="${useCase.id}")
       .code
         code: 
@@ -64,4 +65,3 @@
           alterFlow:
           #alter-flow-editor.editor ${useCase.alterFlow}
           %g:textArea(id="alter" name="alterFlow" value="${useCase.alterFlow}" class="hideme")
-      %g:actionSubmit(value="Save" action="update" id="submitbtn")

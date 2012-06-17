@@ -45,6 +45,7 @@
       Edit Use Case #${useCase.id}
     </h1>
     <g:form method='post'>
+      <g:actionSubmit action='update' id='submitbtn' value='Save'></g:actionSubmit>
       <g:hiddenField name='id' value='${useCase.id}'></g:hiddenField>
       <div class='code'>
         code:
@@ -75,7 +76,6 @@
           <g:textArea class='hideme' id='alter' name='alterFlow' value='${useCase.alterFlow}'></g:textArea>
         </div>
       </div>
-      <g:actionSubmit action='update' id='submitbtn' value='Save'></g:actionSubmit>
     </g:form>
   </div>
 </html>

@@ -12,7 +12,7 @@ class MarkdownToHtml {
 
   def printToFile(project_id) {
     try {
-
+      def project_name
       def sql = new Sql(this.ds)
       def result = sql.rows("select * from project where id = ?", [project_id as long])
 
@@ -22,6 +22,7 @@ class MarkdownToHtml {
         def requirements = sql.rows("select * from requirement where project_id = ?", [it.id])
 
         sb.append("# ${it.name}\r")
+        project_name = it.name
         sb.append("\r")
         sb.append(it.description)
         sb.append("\r")
@@ -31,21 +32,22 @@ class MarkdownToHtml {
         sb.append("## REQUIREMENTS:\r") 
 
         requirements.each { r ->
-          sb.append("## ${r.code}: ${r.title ?: 'trololo'}\r")
+          sb.append("\r")
+          sb.append("## ${r.code}: ${r.title ?: ''}\r")
           sb.append("\r")
           sb.append(r.description)
           sb.append("\r")
 
           def use_cases = sql.rows("select * from use_case uc, requirement_use_cases ruc where ruc.requirement_id = ? and ruc.use_case_id = uc.id", [r.id])
 
-          if(use_cases) sb.append("## USE CASES:\r")
+          if(use_cases) sb.append("> ## USE CASES:\r")
 
           use_cases.each { u ->
-            sb.append("### ${u.code}: ${u.title}")
+            sb.append("\r")
+            sb.append("> * ${u.title}")
             sb.append("\r")
           }
         }
-       
       }
 
       String inputFile = "target/firstdoc.xhtml"
@@ -55,10 +57,13 @@ class MarkdownToHtml {
 
       sb2.append("<?xml version='1.0' encoding='UTF-8'?>\r")
       sb2.append("<html>")
-      sb2.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head>")
+      sb2.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+      sb2.append("<style type='text/css'>.first {font-size: 60px; margin-bottom: 200px;} .projectname {font-style: italic; font-size: 40px; text-align: right; margin-bottom: 500px;}</style>")
+      sb2.append("</head>")
+      sb2.append("<h1 class='first'>Software Requirements Specification</h1>")
+      sb2.append("<h2 class='projectname'>For project: ${project_name}</h2>")
 
       String html = m.markdown(sb.toString()); 
-      
       sb2.append(html)
       sb2.append("</html>")
 
