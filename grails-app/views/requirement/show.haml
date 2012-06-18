@@ -28,8 +28,8 @@
       var reqId = $("#id").val();
       var reqUseCases = $.ajax({
         type: "GET",
-        url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
-        //url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+        //url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
+        url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
         cache: false
       }).done(function(xht){ 
         var dom = (new DOMParser()).parseFromString(diag.diagram.getXMLString(), "text/xml");
@@ -125,12 +125,8 @@
                 .title
                   %h4
                     ${useCase.title}
-                    %small ${useCase.code}
                 .maincontent
                   :javascript
                     var text = converter.makeHtml(${useCase.mainContent});
                     console.log(text)
                   ${useCase.mainContent} 
-                .actions
-                  %g:link(class="btn" controller="useCase" action="show" id="${useCase.id}") show
-                  %g:link(class="btn" controller="useCase" action="edit" id="${useCase.id}") edit

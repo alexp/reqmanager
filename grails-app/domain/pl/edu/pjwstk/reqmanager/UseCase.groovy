@@ -20,4 +20,12 @@ class UseCase {
       preConditions(nullable: true)
       postConditions(nullable: true)
     }
+
+    static mapping = {
+      mainContent type: 'text'
+      basicFlow type: 'text'
+      alterFlow type: 'text'
+      preConditions type: 'text'
+      postConditions type: 'text'
+    }
 }

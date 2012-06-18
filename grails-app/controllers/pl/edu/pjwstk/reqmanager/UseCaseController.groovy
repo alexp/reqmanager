@@ -51,7 +51,6 @@ class UseCaseController {
         return
       }
      
-      params.diagramXml = params.diagramXml.trim()
       useCase.properties = params
 
       if(!useCase.hasErrors() && useCase.save(flush:true)) {

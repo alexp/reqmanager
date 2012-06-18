@@ -19,20 +19,23 @@ class MarkdownToHtml {
       StringBuffer sb = new StringBuffer()
       result.each {
         
-        def requirements = sql.rows("select * from requirement where project_id = ?", [it.id])
+        def requirements = sql.rows("select * from requirement where project_id = ? order by id asc", [it.id])
 
         sb.append("# ${it.name}\r")
         project_name = it.name
         sb.append("\r")
         sb.append(it.description)
         sb.append("\r")
-        sb.append("## Main project note \r")
         sb.append(it.main_note)
         sb.append("\r")
-        sb.append("## REQUIREMENTS:\r") 
+        sb.append("\r")
+        sb.append("<hr />")
+        sb.append("\r")
+        sb.append("# REQUIREMENTS:\r") 
+        sb.append("<hr />")
+        sb.append("\r")
 
         requirements.each { r ->
-          sb.append("\r")
           sb.append("## ${r.code}: ${r.title ?: ''}\r")
           sb.append("\r")
           sb.append(r.description)
@@ -47,6 +50,12 @@ class MarkdownToHtml {
             sb.append("> * ${u.title}")
             sb.append("\r")
           }
+
+          sb.append("\r")
+          sb.append("<br />")
+          sb.append("<hr />")
+          sb.append("<br />")
+          sb.append("\r")
         }
       }
 
@@ -58,7 +67,7 @@ class MarkdownToHtml {
       sb2.append("<?xml version='1.0' encoding='UTF-8'?>\r")
       sb2.append("<html>")
       sb2.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
-      sb2.append("<style type='text/css'>.first {font-size: 60px; margin-bottom: 200px;} .projectname {font-style: italic; font-size: 40px; text-align: right; margin-bottom: 500px;}</style>")
+      sb2.append("<style type='text/css'>.first {font-size: 60px; margin-bottom: 350px;} .projectname {font-style: italic; font-size: 40px; text-align: right; margin-bottom: 500px;}</style>")
       sb2.append("</head>")
       sb2.append("<h1 class='first'>Software Requirements Specification</h1>")
       sb2.append("<h2 class='projectname'>For project: ${project_name}</h2>")
