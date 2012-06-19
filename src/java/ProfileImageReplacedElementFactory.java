@@ -49,7 +49,7 @@ public class ProfileImageReplacedElementFactory implements ReplacedElementFactor
             InputStream input = null;
 
             try {
-                URL local = new URL("http://localhost:8080/reqmanager/requirement/getDiagramImage/" + id);
+                URL local = new URL("http://reqmanager.herokuapp.com/requirement/getDiagramImage/" + id);
   
                 URLConnection lc = local.openConnection();
 
