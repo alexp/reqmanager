@@ -18,8 +18,9 @@ class SpecWorker {
     m.ds = ds
     String html = m.printToFile(project_id)
     
-    DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    Document doc = builder.parse(new ByteArrayInputStream(html.getBytes("UTF-8")))
-    return doc
+//    DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//    Document doc = builder.parse(new ByteArrayInputStream(html.getBytes("UTF-8")))
+
+    return html
   }
 }

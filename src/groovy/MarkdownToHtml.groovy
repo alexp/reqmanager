@@ -38,10 +38,9 @@ class MarkdownToHtml {
         requirements.each { r ->
           sb.append("## ${r.code}: ${r.title ?: ''}\r")
           sb.append("\r")
-
-        
-          sb.append("<div class='basetest'>test</p>")
-
+          if(r.diagram_image) {
+            sb.append("<div class='diagramImage' id='${r.id}'> </div>")
+          }
           sb.append("\r")
           sb.append(r.description)
           sb.append("\r")
@@ -72,7 +71,7 @@ class MarkdownToHtml {
       sb2.append("<?xml version='1.0' encoding='UTF-8'?>\r")
       sb2.append("<html>")
       sb2.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
-      sb2.append("<style type='text/css'>.first {font-size: 60px; margin-bottom: 350px;} .projectname {font-style: italic; font-size: 40px; text-align: right; margin-bottom: 500px;}</style>")
+      sb2.append("<style type='text/css'>.diagramImage { width: 600px; height: 600px; display: block;  } .first {font-size: 60px; margin-bottom: 350px;} .projectname {font-style: italic; font-size: 40px; text-align: right; margin-bottom: 500px;}</style>")
       sb2.append("</head>")
       sb2.append("<h1 class='first'>Software Requirements Specification</h1>")
       sb2.append("<h2 class='projectname'>For project: ${project_name}</h2>")

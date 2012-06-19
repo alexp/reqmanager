@@ -73,10 +73,18 @@ class ProjectController {
       def s = new SpecWorker()
       s.ds = dataSource
 
-      Document doc = s.generateSpec(params.id)
+      String html = s.generateSpec(params.id)
+
+      /*ITextRenderer renderer = new ITextRenderer();
+      renderer.setDocument(doc, null);
+      renderer.layout();
+      OutputStream os = response.getOutputStream();
+      renderer.createPDF(os);
+      os.close();*/
 
       ITextRenderer renderer = new ITextRenderer();
-      renderer.setDocument(doc, null);
+      renderer.getSharedContext().setReplacedElementFactory(new ProfileImageReplacedElementFactory(renderer.getSharedContext().getReplacedElementFactory()));
+      renderer.setDocumentFromString(html);
       renderer.layout();
       OutputStream os = response.getOutputStream();
       renderer.createPDF(os);

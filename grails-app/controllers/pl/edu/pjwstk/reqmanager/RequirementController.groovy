@@ -115,4 +115,10 @@ class RequirementController {
     def requirement = Requirement.get(params.id as Long)
     render requirement.useCases.collect{ it.title } as JSON
   }
+
+  def getDiagramImage = {
+    def requirement = Requirement.get(params.id)
+     
+    render "${requirement.diagramImage}"
+  }
 }

@@ -7,7 +7,7 @@ class Requirement {
     String title 
     String description 
     String code
-    byte[] diagramImage
+    String diagramImage
     
     Diagram diagram
     static hasMany = [useCases : UseCase]
@@ -16,11 +16,11 @@ class Requirement {
       title(nullable: true)
       diagram(nullable: true)
       diagramImage(nullable:true)
-      diagramImage maxSize: 1024 * 1024 * 2
     }
 
     static mapping = {
       description type: 'text'
+      diagramImage type: 'text'
     }
 
     def generateFromXml() {
