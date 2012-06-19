@@ -256,8 +256,8 @@ var AppUseCase = function(elementId) {
         if(confirmation) {
           $.ajax({
             type: "POST",
-            url: "http://reqmanager.herokuapp.com/requirement/addUseCase/" + reqId,
-            //url: "http://localhost:8080/reqmanager/requirement/addUseCase/" + reqId,
+            //url: "http://reqmanager.herokuapp.com/requirement/addUseCase/" + reqId,
+            url: "http://localhost:8080/reqmanager/requirement/addUseCase/" + reqId,
             cache: false,
             data: { xmlString: ucDiag.getXMLString(), clickedUCName: clickedElement.getName(), clickedUCId: clickedElement.getId() }
           }).done(function(msg) {
@@ -277,6 +277,7 @@ var AppUseCase = function(elementId) {
   ucDiag.interaction(true);
 
   this.diagram = ucDiag;
+  this.mainCanvas = c;
   console.log('done');
 
 }

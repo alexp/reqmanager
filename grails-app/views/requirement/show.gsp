@@ -29,8 +29,8 @@
         var reqId = $("#id").val();
         var reqUseCases = $.ajax({
           type: "GET",
-          //url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
-          url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+          url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
+          //url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
           cache: false
         }).done(function(xht){ 
           var dom = (new DOMParser()).parseFromString(diag.diagram.getXMLString(), "text/xml");
@@ -58,7 +58,6 @@
       
                 if(xht.indexOf(itemValue.value.toString()) != -1) {
       
-                  console.log("THISISIT!!!!! : ");
                   console.log(usecaseArray[i]);
       
                   var divv = document.getElementById("ud_diagram_div");

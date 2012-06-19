@@ -17,8 +17,8 @@
       var reqId = $("#id").val();
       var reqUseCases = $.ajax({
         type: "GET",
-        url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
-        //url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
+        //url: "http://reqmanager.herokuapp.com/requirement/getUseCases/" + reqId,
+        url: "http://localhost:8080/reqmanager/requirement/getUseCases/" + reqId,
         cache: false
       }).done(function(xht){ 
         var dom = (new DOMParser()).parseFromString(app.diagram.getXMLString(), "text/xml");
@@ -84,6 +84,13 @@
 
       $("#submitbtn").click(function() {
         textarea.val(editor.getSession().getValue()); 
+        try {
+        console.log(document.getElementById('c1'));
+        console.log("main canvas: " + document.getElementById("c1").toDataURL("image/png"));
+        } catch(err) {
+          console.log(err);
+        }
+        $("#diagramImage").val(document.getElementById('c1').toDataURL("image/png"));
         $("#diagramXml").val(app.diagram.getXMLString());
       });
 
@@ -99,6 +106,7 @@
         %form(name="update requirement" method="post" class="form-horizontal")
           %g:hiddenField(name="id" value="${requirement.id}")
           %g:hiddenField(id='diagramXml' name="diagram.xmlString" value="${requirement.diagram?.xmlString}")
+          %g:hiddenField(id='diagramImage' name="diagramImage" value="${requirement.diagramImage}")
           %fieldset.well
             .control-group
               %label.control-label(for="code")

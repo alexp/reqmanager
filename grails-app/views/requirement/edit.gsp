@@ -86,6 +86,13 @@
       
         $("#submitbtn").click(function() {
           textarea.val(editor.getSession().getValue()); 
+          try {
+          console.log(document.getElementById('c1'));
+          console.log("main canvas: " + document.getElementById("c1").toDataURL("image/png"));
+          } catch(err) {
+            console.log(err);
+          }
+          $("#diagramImage").val(document.getElementById('c1').toDataURL("image/png"));
           $("#diagramXml").val(app.diagram.getXMLString());
         });
       
@@ -102,6 +109,7 @@
         <form class='form-horizontal' method='post' name='update requirement'>
           <g:hiddenField name='id' value='${requirement.id}'></g:hiddenField>
           <g:hiddenField id='diagramXml' name='diagram.xmlString' value='${requirement.diagram?.xmlString}'></g:hiddenField>
+          <g:hiddenField id='diagramImage' name='diagramImage' value='${requirement.diagramImage}'></g:hiddenField>
           <fieldset class='well'>
             <div class='control-group'>
               <label class='control-label' for='code'>

@@ -38,6 +38,11 @@ class MarkdownToHtml {
         requirements.each { r ->
           sb.append("## ${r.code}: ${r.title ?: ''}\r")
           sb.append("\r")
+
+        
+          sb.append("<div class='basetest'>test</p>")
+
+          sb.append("\r")
           sb.append(r.description)
           sb.append("\r")
 
@@ -75,6 +80,10 @@ class MarkdownToHtml {
       String html = m.markdown(sb.toString()); 
       sb2.append(html)
       sb2.append("</html>")
+  
+      PrintWriter out = new PrintWriter("target/firstdoc.xhtml")
+      out.write(sb2.toString())
+      out.close()
 
       return sb2.toString() 
 

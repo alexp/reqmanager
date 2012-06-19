@@ -11,7 +11,7 @@ class RequirementController {
 
     println "save initiated"
     println params
-    
+
     def requirement = new Requirement(params)
 
     if(!requirement.save(flush: true)) {
@@ -41,6 +41,16 @@ class RequirementController {
     def statuses = Status.list()
     
     println params
+    println "!!!!!!!!!!!"
+    println ""
+    println ""
+    println ""
+    println ""
+    println ""
+    println ""
+    println ""
+    println ""
+    println params.diagramImage
 
     if(requirement) {
       params.diagram.xmlString = params.diagram.xmlString.trim()

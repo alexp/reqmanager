@@ -7,6 +7,7 @@ class Requirement {
     String title 
     String description 
     String code
+    byte[] diagramImage
     
     Diagram diagram
     static hasMany = [useCases : UseCase]
@@ -14,6 +15,8 @@ class Requirement {
     static constraints = {
       title(nullable: true)
       diagram(nullable: true)
+      diagramImage(nullable:true)
+      diagramImage maxSize: 1024 * 1024 * 2
     }
 
     static mapping = {
